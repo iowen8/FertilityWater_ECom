@@ -1,0 +1,110 @@
+﻿@model MiniShoppingCartModel
+@using Nop.Web.Models.ShoppingCart;
+<div id="flyout-cart" class="flyout-cart">
+    <div class="mini-shopping-cart">
+        <div class="count">
+@*            @if (Model.TotalProducts == 0)
+            {
+                @T("ShoppingCart.Mini.NoItems")
+            }
+            else
+            {*@
+    @*        }*@
+        </div>
+@*        @if (Model.TotalProducts > 0)
+        {
+            <div class="items">
+                @for (int i = 0; i < Model.Items.Count; i++)
+                {
+                    var item = Model.Items[i];
+                    <div class="item @(i == 0 ? "first" : null)">
+                        @if (Model.ShowProductImages)
+                        {
+                            <div class="picture">
+                                <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })" title="@item.Picture.Title">
+                                    <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                                </a>
+                            </div>
+                        }
+                        <div class="product">
+                            <div class="name">
+                                <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })">@item.ProductName</a>
+                            </div>
+                            @if (!String.IsNullOrEmpty(item.AttributeInfo))
+                            {
+                                <div class="attributes">
+                                    @Html.Raw(item.AttributeInfo)
+                                </div>
+                            }
+                            <div class="price">@T("ShoppingCart.Mini.UnitPrice"): <span>@item.UnitPrice</span></div>
+                            <div class="quantity">@T("ShoppingCart.Mini.Quantity"): <span>@item.Quantity</span></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="totals">@T("ShoppingCart.Totals.SubTotal"): <strong>@Model.SubTotal</strong></div>
+            <div class="buttons">
+                @if (Model.DisplayShoppingCartButton)
+                {
+                    <input type="button" value="@T("ShoppingCart.Mini.ViewCart")" class="button-1 cart-button" onclick="setLocation('@(Url.RouteUrl("ShoppingCart"))')" />
+                    
+                }
+                @if (Model.DisplayCheckoutButton)
+                {
+                    var checkoutUrl = "";
+                    if (Model.AnonymousCheckoutAllowed && Model.CurrentCustomerIsGuest)
+                    {
+                        checkoutUrl = Url.RouteUrl("LoginCheckoutAsGuest", new { returnUrl = Url.RouteUrl("ShoppingCart") });
+                    }
+                    else
+                    {
+                        checkoutUrl = Url.RouteUrl("Checkout");
+                    }
+                    <input type="button" value="@T("Checkout.Button")" class="button-1 checkout-button" onclick="setLocation('@checkoutUrl')" />
+                }
+            </div>
+        }*@
+<div class="title_right">
+<div class="dropdown" id="cart_dropdown">
+<span> There are @Model.TotalProducts item(s) in your cart.</span>
+						<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="cart_down" href="#" >
+						<i class="icon-shopping-cart"></i>
+						Cart
+						<span class="caret"></span>
+						</a>
+						
+						<div class="dropdown-menu" aria-labelledby="cart_down" role="menu" id="cart_down_content" >
+                            <ul id="cart" style="max-height:309px;overflow-y:scroll;">
+                                @for (int i = 0; i < Model.Items.Count; i++)
+                {
+var item = Model.Items[i];
+                                    <li>
+                                        <div class="dropdown_cart_img">
+                                            <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })" title="@item.Picture.Title">
+                                                <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                                            </a>
+                                        </div>
+                                        <div class="product_name">
+                                            <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })">@item.ProductName</a>
+                                        </div>
+                                        <div class="quantity"> Quantity <input type="text" value="@item.Quantity" /></div>
+                                        <div class="actions">
+                                            <a href="#"> 	<i class="icon-caret-up"></i>	</a>
+                                            <a href="#"> 	<i class="icon-caret-down"></i>	</a>
+                                            <a href="#"> 	<i class="icon-trash"></i>		</a>
+                                        </div>
+                                    </li>
+}
+
+                            </ul>
+									<div class="cart_total_checkout"> 
+									<span class="pull-left col1"> Sub Total $ </span> 
+									<span class="pull-left col1"> @Model.SubTotal </span> 
+									
+									<a href="@Request.Url.GetLeftPart(UriPartial.Authority)/ShoppingCart/Cart" class="pull-right continue_shopping"> Checkout </a>
+
+									</div>
+						</div>
+				</div>
+    </div></div>
+</div>

@@ -1,0 +1,10 @@
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\Views\TaxCountryStateZip\Configure.cshtml
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\Description.txt
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\web.config
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\logo.jpg
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\Nop.Plugin.Tax.CountryStateZip.dll.config
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\Nop.Plugin.Tax.CountryStateZip.dll
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Tax.CountryStateZip\Nop.Plugin.Tax.CountryStateZip.pdb
+C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.Tax.CountryStateZip\obj\Debug\Nop.Plugin.Tax.CountryStateZip.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.Tax.CountryStateZip\obj\Debug\Nop.Plugin.Tax.CountryStateZip.dll
+C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.Tax.CountryStateZip\obj\Debug\Nop.Plugin.Tax.CountryStateZip.pdb

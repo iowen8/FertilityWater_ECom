@@ -1,0 +1,24 @@
+﻿@model OrderTotalsModel
+@using Nop.Web.Models.ShoppingCart;
+	  <tr>
+					<td colspan="4" width="85%">  Estimated Shipping: </td>
+					<td colspan="2" width="15%" class="b_price"> @Model.Shipping </td>
+ 				</tr>
+				
+				<tr>
+					<td colspan="4" width="85%" class="">  Sales Tax: </td>
+                    
+					<td colspan="2" width="15%" class="b_price"> @Model.Tax</td>
+ 
+ 				</tr>
+		
+                </tbody>
+					<tfoot>
+							<tr>
+								<td colspan="4" width="85%">  Enter Coupon Code: <input type="text" value="ED03321" class="coupon" /> <a href="#" class="cbtn"> Update </a> </td>
+								<td colspan="2" width="15%" class="total_price"> 
+								<div class="total"> TOTAL </div>
+								@Model.OrderTotal
+								</td>
+							</tr>
+					</tfoot>

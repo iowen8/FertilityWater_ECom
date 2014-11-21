@@ -1,0 +1,2 @@
+DataProvider: sqlserver
+DataConnectionString: Data Source=MANDRAKE.arvixe.com;Initial Catalog=fwDB;Integrated Security=False;Persist Security Info=False;User ID=zadmin;Password=10f14lif3

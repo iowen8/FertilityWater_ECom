@@ -1,0 +1,107 @@
+﻿@model ShoppingCartModel
+@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.ShoppingCart;
+@{
+    var webHelper = EngineContext.Current.Resolve<IWebHelper>();
+}
+<script>
+    function addOne(item) {
+var nme = item.value;
+        var newVal = parseInt(nme) + 1;
+        item.value = newVal;
+    }
+
+    function minOne(item) {
+        var nme = item.value;
+        if (parseInt(nme) < 1)
+            return;
+        var newVal = parseInt(nme) - 1;
+        item.value = newVal;
+    }
+
+    function removeItem(item) {
+      //  alert(item);
+        item.value = 0;
+        document.getElementById('updatecart').click();
+    }
+</script>
+<div class="order-summary-content">
+    @Html.Widget("order_summary_content_before")
+    @Html.Partial("_OrderReviewData", Model.OrderReviewData)
+    @if (Model.Items.Count > 0)
+    {
+        if (Model.Warnings.Count > 0)
+        {
+        <div class="message-error">
+            <ul>
+                @for (int i = 0; i < Model.Warnings.Count; i++)
+                {
+                    <li>@Model.Warnings[i]</li>
+                }
+            </ul>
+        </div>
+        }
+
+
+<!-- Page Content Container -->
+<section id="content" class="mbtm cart">
+	<section class="container-fluid container">
+	
+		<section class="row-fluid">
+		
+		
+			<div class="cart_table_holder">
+@*we add enctype = "multipart/form-data" because "File upload" attribute control type requires it*@
+        @using (Html.BeginRouteForm("ShoppingCart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {                    <input type="submit" name="updatecart" id="updatecart"  value="@T("ShoppingCart.UpdateCart")" class="button-2 update-cart-button" />
+<button type="submit" id="checkout" name="checkout" value="checkout" class="pull-right checkout_btn">Proceed to Checkout</button>
+
+			<table width="100%" cellpadding="10" border="0">
+ 				   <thead>
+				  <tr>
+                    <th width="60%" colspan="2">Description</th>
+                    <th width="10%">Price</th>
+                    <th width="15%">Quantity</th>
+                    <th width="10%">Total</th>
+					<th width="5%">&nbsp;</th>
+                  </tr>
+				   </thead>
+				   <tbody>
+		  @foreach (var item in Model.Items)
+                {
+				  <tr>
+					<td width="14%" class="img"> <img src="@item.Picture.ImageUrl" alt="@item.Picture.Title" /></td>
+					<td> 
+						<div class="product_name">	@item.ProductName </div> 
+						<div class="product_size"> 	</div>
+						<div class="product_color">	</div>
+					</td>
+					<td class="price"> @item.UnitPrice</td>
+					<td> <input type="text" value="@item.Quantity" class="quantity" name="itemquantity@(item.Id)"  id="itemquantity@(item.Id)" /><button type="button" class="btn" onclick="addOne(itemquantity@(item.Id))"> <i class="icon-plus"></i></button><button type="button" class="btn" onclick="minOne(itemquantity@(item.Id))"> <i class="icon-minus"></i></button></td>
+					<td class="price"> @item.SubTotal</td>
+					<td> <button type="button" class="cbtn" onclick="removeItem(itemquantity@(item.Id))"> Remove </button> </td>
+				</tr>
+}
+	
+
+                 @Html.Action("OrderTotals", "ShoppingCart", new { isEditable = Model.IsEditable })
+ 			
+			</table>
+				<div class="cart_btn_wrapper">
+				<a href="#" class="pull-left continue_shopping"> Continue Shopping </a>
+                            <button type="submit" id="checkout" name="checkout" value="checkout" class="pull-right checkout_btn">Proceed to Checkout</button>
+				</div>
+  }
+			</div>
+
+		</section>
+	</section>
+
+</section>
+<!-- Page Content Container -->
+}
+
+   
+    @Html.Widget("order_summary_content_after")
+</div>

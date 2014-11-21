@@ -1,0 +1,415 @@
+﻿@model AddressModel
+@using Nop.Web.Models.Common;
+
+@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+{
+    <script type="text/javascript">
+        function GetStates() {
+
+            //alert("changed");
+            var selectedItem = $("#countryS").val();
+            //alert("before states");
+            var ddlStates = $("#stateS");
+            var statesProgress = $("#states-loading-progress1");
+            statesProgress.show();
+            //    alert("here before ajax");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                data: { "countryId": selectedItem, "addEmptyStateIfRequired": "true" },
+            success: function (data) {
+                ddlStates.html('');
+                $.each(data, function (id, option) {
+                    ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                });
+                statesProgress.hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to retrieve states.');
+                statesProgress.hide();
+            }
+        });
+        }
+
+         function GetStatesB() {
+
+            //alert("changed");
+            var selectedItem = $("#country").val();
+            //alert("before states");
+            var ddlStates = $("#state");
+            var statesProgress = $("#states-loading-progress");
+            statesProgress.show();
+        //    alert("here before ajax");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                data: { "countryId": selectedItem, "addEmptyStateIfRequired": "true" },
+                success: function (data) {
+                    ddlStates.html('');
+                    $.each(data, function (id, option) {
+                        ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                    });
+                    statesProgress.hide();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                    statesProgress.hide();
+                }
+            });
+        }
+    </script>
+    <script>
+
+    function doFormSubmit() {
+
+        var serialized = $("#shipAddressForm").serializeArray();
+        var s = '';
+        var sdata = {};
+        for (s in serialized) {
+            sdata[serialized[s]['name']] = serialized[s]['value']
+        }
+        var collection = JSON.stringify(sdata);
+        alert("submitting");
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("OpcShippingAddressForm", "Checkout")",
+            data: { formcollection: collection }, // serializes the form's elements.
+            dataType: "text",
+            success: function (data) {
+                alert(data); // show response from the php script.
+                $("#targetShipping").html(data);
+            }
+        });
+        return false; // avoid to execute the actual submit of the form.
+    }
+
+  </script>
+}
+@Html.HiddenFor(model => model.Id)
+
+					
+@if(Model.isShip){
+
+				<figure class="span6 first">
+
+<h3> Shipping Information </h3>
+@*                 	<strong class="green-t">Checkout as Guest</strong>*@
+                    <form class="" action="#" method="post" id="shipAddressForm" onsubmit="return false;">
+					<ul class="billing-form">
+                            <li>   
+                              <div class="control-group">
+        @Html.LabelFor(model => model.FirstName, new {@class="control-label" }, ":")
+                                <div class="controls">
+            @Html.EditorFor(model => model.FirstName, new{id="inputFirstnameS"})
+        @Html.RequiredHint()
+        @Html.ValidationMessageFor(model => model.FirstName)
+</div>
+                              </div>
+                              <div class="control-group">
+        @Html.LabelFor(model => model.LastName, new {@class="control-label" }, ":")
+                                <div class="controls">
+            @Html.EditorFor(model => model.LastName, new{id="inputLastnameS"})
+        @Html.RequiredHint()
+        @Html.ValidationMessageFor(model => model.LastName)                                </div>
+                              </div>
+                              
+                            </li>
+                            <li>   
+                              <div class="control-group">
+                                <label for="inputCompany" class="control-label">Company<sup>*</sup></label>
+                                <div class="controls">
+                                  <input type="text" placeholder="" id="inputCompanyS">
+                                </div>
+                              </div>
+                              <div class="control-group">          
+        @Html.LabelFor(model => model.Email, new { @class="control-label"}, ":")
+                                <div class="controls">
+  @Html.EditorFor(model => model.Email, new{id="inputEmailS"})
+        @Html.RequiredHint()
+        @Html.ValidationMessageFor(model => model.Email)                                </div>
+                              </div>
+                            </li>
+                            <li>   
+                              <div class="control-group">
+            @Html.LabelFor(model => model.Address1, new {@class="control-label" }, ":")
+
+                                <div class="controls">
+                @Html.EditorFor(model => model.Address1, new{id="inputAddressS"})
+
+                @Html.RequiredHint()
+            
+            @Html.ValidationMessageFor(model => model.Address1)                                </div>
+                              </div>
+                            </li>
+                            <li> 
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.CountryId, new { @class = "control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.CountryId, Model.AvailableCountries, new { id = "countryS", @onchange = "GetStates();" })
+                                        @Html.RequiredHint()
+                                        @Html.ValidationMessageFor(model => model.CountryId)
+                                    </div>
+                                </div>  
+                              <div class="control-group">
+            @Html.LabelFor(model => model.City, new { @class="control-label"}, ":")
+
+                                <div class="controls">
+                @Html.EditorFor(model => model.City, new{id="inputCityS"})
+
+
+                @Html.RequiredHint()
+            
+            @Html.ValidationMessageFor(model => model.City)                                </div>
+                              </div>
+      
+                            </li>
+                            <li>   
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.StateProvinceId, new { @class = "control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.StateProvinceId, Model.AvailableStates, new { id = "stateS" })
+                                        <span id="states-loading-progress1" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+                                        @Html.ValidationMessageFor(model => model.StateProvinceId)
+                                    </div>
+                                </div>
+                              <div class="control-group">
+            @Html.LabelFor(model => model.ZipPostalCode, new {@class="control-label" }, ":")
+
+                                <div class="controls">
+                @Html.EditorFor(model => model.ZipPostalCode, new{id="inputZipS"})
+       
+                @Html.RequiredHint()
+            
+            @Html.ValidationMessageFor(model => model.ZipPostalCode)                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="control-group">
+            @Html.LabelFor(model => model.PhoneNumber, new {@class="control-label" }, ":")
+
+                                <div class="controls">
+                @Html.EditorFor(model => model.PhoneNumber, new {id="inputTelephoneS"})
+            @if (Model.PhoneRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.PhoneNumber)                                </div>
+
+                              </div>
+                              <div class="control-group">
+            @Html.LabelFor(model => model.FaxNumber, new {@class="control-label" }, ":")
+
+                                <div class="controls">
+                @Html.EditorFor(model => model.FaxNumber, new{id="inputFaxS"})
+            @if (Model.FaxRequired)
+            {
+                @Html.RequiredHint()
+            }
+            @Html.ValidationMessageFor(model => model.FaxNumber)                                </div>
+                              </div>
+                            </li>
+                        	<li>
+                            	<div class="control-group">
+                                <div class="controls">
+                                    <button class="more-btn" id="cBtn" onclick="doFormSubmit();" >Get Rates</button>
+                                </div>
+                              </div>
+                            </li>
+                        </ul>
+                    </form>
+				</figure>
+
+    <figure class="span6" id="targetShipping">
+    </figure>
+
+}
+					@if(!Model.isShip){
+                        <script>
+    function doBillingFormSubmit() {
+
+        var serialized = $("#billingAddressForm").serializeArray();//.concat($("#bMethodForm").serializeArray());
+
+        var s = '';
+        
+        var sdata = {};
+        for (s in serialized) {
+            sdata[serialized[s]['name']] = serialized[s]['value']
+        }
+      
+        var collectionB = JSON.stringify(sdata);
+        alert(collectionB);
+
+        sdata = {};
+        s = '';
+        serialized = $("#bMethodForm").serializeArray();
+        for (s in serialized) {
+            sdata[serialized[s]['name']] = serialized[s]['value']
+        }
+
+        var collectionC = JSON.stringify(sdata);
+        alert(collectionC);
+        alert("submitting");
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("SaveBillingInfo", "Checkout")",
+            data: { formcollection: collectionB, cardcollection: collectionC }, // serializes the form's elements.
+            dataType: "text",
+        success: function (data) {
+            var d = JSON.parse(data);
+            alert(d.success);
+            alert(d.html);
+            $("#fCO").html(d.html);
+            presentationCycle.gotoSlide(3);
+
+        },
+        error: function (data)
+        {
+            alert(data);
+            alert("error");
+            return false;
+        }
+    });
+    return false; // avoid to execute the actual submit of the form.
+    }
+    
+                        </script>
+				<figure class="span6 first">
+
+<h3> Billing Information </h3>
+                    <script>
+                        function setCardHolderName()
+                        {
+                            var mname = "@(Model.FirstName) @(Model.LastName)";
+                            $("#CardholderName").val(mname);
+                        }
+                    </script>
+@*                 	<strong class="green-t">Checkout as Guest</strong>*@
+                    <form class="" action="#" method="post" id="billingAddressForm" onsubmit="return false;">
+                        <ul class="billing-form">
+                           
+                            <li>
+                                <div class="control-group">
+                                    <label for="inputCompany" class="control-label">Company<sup>*</sup></label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="" id="inputCompany">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.Email, new { @class="control-label"}, ":")
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.Email, new{id="inputEmail"})
+                                        @Html.RequiredHint()
+                                        @Html.ValidationMessageFor(model => model.Email)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.Address1, new {@class="control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.Address1, new{id="inputAddress"})
+
+                                        @Html.RequiredHint()
+
+                                        @Html.ValidationMessageFor(model => model.Address1)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.CountryId, new { @class = "control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.CountryId, Model.AvailableCountries, new { id = "country", @onchange = "GetStatesB();" })
+
+
+
+                                        @Html.RequiredHint()
+                                        @Html.ValidationMessageFor(model => model.CountryId)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.City, new { @class="control-label"}, ":")
+
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.City, new{id="inputCity"})
+
+
+                                        @Html.RequiredHint()
+
+                                        @Html.ValidationMessageFor(model => model.City)
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.StateProvinceId, new { @class = "control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.StateProvinceId, Model.AvailableStates, new { id = "state" })
+                                        <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+                                        @Html.ValidationMessageFor(model => model.StateProvinceId)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.ZipPostalCode, new {@class="control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.ZipPostalCode, new{id="inputZip"})
+
+                                        @Html.RequiredHint()
+
+                                        @Html.ValidationMessageFor(model => model.ZipPostalCode)
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.PhoneNumber, new {@class="control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.PhoneNumber, new {id="inputTelephone"})
+                                        @if (Model.PhoneRequired)
+            {
+                                            @Html.RequiredHint()
+            }
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                                    </div>
+
+                                </div>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.FaxNumber, new {@class="control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.FaxNumber, new{id="inputFax"})
+                                        @if (Model.FaxRequired)
+            {
+                                            @Html.RequiredHint()
+            }
+                                        @Html.ValidationMessageFor(model => model.FaxNumber)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button class="more-btn" id="cBtnBill" onclick="doBillingFormSubmit();">Continue</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </form>
+				</figure>
+<script>
+    setCardHolderName();
+</script>
+
+        }

@@ -1,0 +1,11 @@
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\Views\PaymentPayPalDirect\Configure.cshtml
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\Views\PaymentPayPalDirect\PaymentInfo.cshtml
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\web.config
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\Description.txt
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\logo.jpg
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\Nop.Plugin.Payments.PayPalDirect.dll.config
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\Nop.Plugin.Payments.PayPalDirect.dll
+C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.PayPalDirect\Nop.Plugin.Payments.PayPalDirect.pdb
+C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.Payments.PayPalDirect\obj\Debug\Nop.Plugin.Payments.PayPalDirect.dll
+C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.Payments.PayPalDirect\obj\Debug\Nop.Plugin.Payments.PayPalDirect.pdb
+C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.Payments.PayPalDirect\obj\Debug\Nop.Plugin.Payments.PayPalDirect.csprojResolveAssemblyReference.cache

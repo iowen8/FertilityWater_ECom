@@ -1,0 +1,37 @@
+﻿@model ProductDetailsModel.AddToCartModel
+@using Nop.Web.Models.Catalog;
+@using Nop.Core.Domain.Orders;
+<script>
+    function addOne(item) {
+var nme = item.value;
+        var newVal = parseInt(nme) + 1;
+        item.value = newVal;
+    }
+
+    function minOne(item) {
+        var nme = item.value;
+        if (parseInt(nme) < 1)
+            return;
+        var newVal = parseInt(nme) - 1;
+        item.value = newVal;
+    }
+
+  
+    
+</script>
+@{
+ 			<figure class="span3" id="proudct_options">
+				
+				<h3> Options </h3>
+				<form action="#">
+	<label for="quantity"> Quantity </label>
+					@Html.TextBoxFor(model => model.EnteredQuantity, new {@class = "qty-input quantity", id="itemquantity_1", value="1", name="quantity"})<button type="button" class="btn" style="width:35px;padding: 0px;height:30px;overflow:hidden;margin-left:10px;" onclick="addOne(itemquantity_1)"> <i class="icon-plus"></i></button><button type="button" class="btn" style="width:35px;padding: 0px;overflow:hidden;height:30px; margin-left:10px;" onclick="minOne(itemquantity_1)"> <i class="icon-minus"></i></button>
+					
+
+       
+                <button id="add-to-cart-button-@Model.ProductId"  data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new { productId = Model.ProductId, shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart })', '#product-details-form');return false;">Add To Cart</button>
+<div style="clear:both">&nbsp;</div>
+	</form>
+			
+			</figure>
+}

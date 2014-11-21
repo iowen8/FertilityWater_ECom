@@ -1,0 +1,349 @@
+﻿@model SearchModel
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Search").Text);
+}
+@using Nop.Web.Models.Catalog;
+@using Nop.Web.Extensions;
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#@Html.FieldIdFor(model => model.As)").click(toggleAdvancedSearch);
+
+        toggleAdvancedSearch();
+    });
+
+    function toggleAdvancedSearch() {
+
+        if ($('#@Html.FieldIdFor(model => model.As)').is(':checked')) {
+            $('#advanced-search-block').show();
+        }
+        else {
+            $('#advanced-search-block').hide();
+        }
+    }
+</script>
+<div class="page search-page">
+    <div class="page-title">
+    </div>
+    <div class="page-body">
+<section class="mtop">
+	<section class="container-fluid container">
+		<section class="row-fluid">
+			<section id="donation_box">
+				<section class="container container-fluid">
+					<section class="row-fluid">
+					<div class="span8 first"> <h2>@T("Search")</h2> </div>
+						<div class="span4 title_right">
+ 
+				<div class="dropdown" id="cart_dropdown">
+ 				<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="dd_title" href="#">
+				<i class="icon-user"></i>
+ 				Help
+				</a>
+				
+				<figure class="dropdown-menu hidden_layer" aria-labelledby="dd_title" role="menu" id="title_dropdown">
+						<div class="inner">
+							<div class="span2 first">
+								<span class="icon_alert"> i </span>
+							</div>
+							<div class="span10"> 
+							<h3> Still looking for answers?  </h3>
+							<p> One of our professionals can probably help you out. You can contact them with the button below.</p>
+                                <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Contact" class="btns pull-left"> Contact Us </a>
+							</div>
+						</div>
+				</figure>
+		</div>
+
+			</div>
+		
+		</section>
+				</section>
+			</section>		<!-- end of Page Title -->
+	</section>
+ 		<section class="row-fluid">
+			<!-- BreadCrumbs -->
+				<figure id="breadcrumbs" class="span12">
+					<ul class="breadcrumb">
+					<li><a href="#">Home</a> <span class="divider">/</span></li>
+					<li><a href="#">Pages</a> <span class="divider">/</span></li>
+					<li class="active">Search Page </li>
+					</ul>
+				</figure>
+			<!-- End of breadcrumbs -->
+		</section>
+	</section>
+</section>
+<!-- End of Tile & Breadcrumbs -->
+<!-- Page Content Container -->
+
+<figure class="span3" id="horizontal_tabs">
+        <div class="search-input">
+            @using (Html.BeginRouteForm("ProductSearch", FormMethod.Get))
+            {
+                <div class="basic-search">
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Q, new { }, ":")
+                        @Html.TextBoxFor(model => model.Q, new { @class = "search-text" })
+                    </div>
+                    @Html.Widget("productsearch_page_basic")
+                    <div class="inputs reversed">
+                        @Html.CheckBoxFor(model => model.As)
+                        @Html.LabelFor(model => model.As)
+                    </div>
+                </div>
+                <div class="advanced-search" id="advanced-search-block">
+                    @if (Model.AvailableCategories.Count > 0)
+                    {
+                        <div class="inputs">
+                            @Html.LabelFor(model => model.Cid, new { }, ":")
+                            @Html.DropDownListFor(model => model.Cid, Model.AvailableCategories)
+                        </div>
+                        <div class="inputs reversed">
+                            @Html.CheckBoxFor(model => model.Isc)
+                            @Html.LabelFor(model => model.Isc)
+                        </div>
+                    }
+                    @if (Model.AvailableManufacturers.Count > 0)
+                    {
+                        <div class="inputs">
+                            @Html.LabelFor(model => model.Mid, new { }, ":")
+                            @Html.DropDownListFor(model => model.Mid, Model.AvailableManufacturers)
+                        </div>
+                    }
+                    <div class="inputs">
+                        <label>@T("Search.PriceRange"):</label>
+                        <span class="price-range">
+                            @T("Search.PriceRange.From")
+                            @Html.TextBoxFor(model => model.Pf, new { @class = "price-from" })<br />
+                            @T("Search.PriceRange.To")
+                            @Html.TextBoxFor(model => model.Pt, new { @class = "price-to" })
+                        </span>
+                    </div>
+                    <div class="inputs reversed">
+                        @Html.CheckBoxFor(model => model.Sid)
+                        @Html.LabelFor(model => model.Sid)
+                    </div>
+                    @Html.Widget("productsearch_page_advanced")
+                </div>
+                <div class="buttons">
+                    <input type="submit" class="button-1 search-button" value="@T("Search")" />
+                </div>
+            }
+        </div>
+        <div class="product-selectors">
+            @*view mode*@
+            @if (Model.PagingFilteringContext.AllowProductViewModeChanging && Model.Products.Count > 0)
+            {
+                <div class="product-viewmode">
+                    <span>@T("Catalog.ViewMode")</span>
+                    @Html.DropDownList("products-viewmode", Model.PagingFilteringContext.AvailableViewModes, new { onchange = "setLocation(this.value);" })
+                </div>
+            }
+            @*sorting*@
+            @if (Model.PagingFilteringContext.AllowProductSorting && Model.Products.Count > 0)
+            {
+                <div class="product-sorting">
+                    <span>@T("Catalog.OrderBy")</span>
+                    @Html.DropDownList("products-orderby", Model.PagingFilteringContext.AvailableSortOptions, new { onchange = "setLocation(this.value);" })
+                </div>
+            }
+            @*page size*@
+            @if (Model.PagingFilteringContext.AllowCustomersToSelectPageSize && Model.Products.Count > 0)
+            {
+                <div class="product-page-size">
+                    <span>@T("Catalog.PageSize")</span>
+                    @Html.DropDownList("products-pagesize", Model.PagingFilteringContext.PageSizeOptions, new { onchange = "setLocation(this.value);" })
+                    <span>@T("Catalog.PageSize.PerPage")</span>
+                </div>
+            }
+        </div>
+</figure>
+<figure class="span9" id="horizontal_tabs_content">			
+					<div  id="myTabContent">
+							  <div  >
+        <div class="search-results">
+            @if (!String.IsNullOrEmpty(Model.Warning))
+            {
+                <strong class="warning">
+                    @Model.Warning
+                </strong>
+            }
+            @if (Model.NoResults)
+            {
+                <strong class="result">
+                    @T("Search.NoResultsText")
+                </strong>
+            }
+
+					
+
+					
+            @*product list*@
+            @if (Model.Products.Count > 0)
+            {
+                if (Model.PagingFilteringContext.ViewMode == "list")
+                {
+                    @*list mode*@
+                    <div class="product-list">
+<section id="content" class="mbtm product_grid">
+	<section class="container-fluid container">
+	
+		<section class="row-fluid">
+			
+			<section class="span9 product_view" id="product_list">  
+ 
+										<Section class="product_list_holder" >
+                        @foreach (var product in Model.Products)
+                        {
+    //prepare "Add to cart" AJAX link
+    string addtocartlink = "";
+    var shoppingCartTypeId = 1;
+    var quantity = 1;
+    if (product.ProductPrice.ForceRedirectionAfterAddingToCart)
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, forceredirection = product.ProductPrice.ForceRedirectionAfterAddingToCart });
+    }
+    else
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, });
+    }
+					<figure class="span10 first product"> 
+						
+						<div class="product_img span4 first">
+<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>			
+						</div>
+						<div class="span8 product_description">
+						
+<h3> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName"> @product.Name</a> </h3>
+							<p>@product.ShortDescription </p>
+						<span class="price pull-left">  @product.ProductPrice.Price @*<del> <sup>$</sup>99.50 </del>*@</span>
+						<a href="javascript:void(0)" class="btn pull-right" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink    ');return false;"> Add to Cart </a>
+						</div>
+ 				
+					</figure>
+<div style="clear:both">&nbsp;</div>
+<div style="clear:both">&nbsp;</div>
+
+                        }
+</Section>
+                    </div>
+                }
+                else
+                {	
+                    @*grid mode*@
+                    <div class="product-grid">
+<section id="content" class="mbtm product_grid">
+	<section class="container-fluid container">
+	
+		<section class="row-fluid">
+			
+			<section class="span9 product_view" id="product_grid">  
+<Section class="product_image_holder">
+					@{
+var cnt = 0;
+foreach(var product in Model.Products)
+{
+    //prepare "Add to cart" AJAX link
+    string addtocartlink = "";
+    var shoppingCartTypeId = 1;
+    var quantity = 1;
+    if (product.ProductPrice.ForceRedirectionAfterAddingToCart)
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, forceredirection = product.ProductPrice.ForceRedirectionAfterAddingToCart });
+    }
+    else
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, });
+    }
+    if (cnt == 0)
+{
+	<figure class="span4 first" id="product" style="padding-right:10px;"> 
+<div class="product_img">
+								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
+								<span class="sale_icon"></span>
+						</div>
+						
+						<div class="first product_description">
+							<h3> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName"> @product.Name</a> </h3>
+							<p>@product.ShortDescription </p>
+							<span class="price"> @product.ProductPrice.Price @*<del> <sup>$</sup>99.50 </del>*@</span>
+						<a href="javascript:void(0)" class="btn pull-right" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink    ');return false;"> Add to Cart </a>
+						</div>
+						
+						
+						
+					</figure>
+ cnt = cnt +1;
+continue;
+}
+
+if(cnt > 0 && cnt < 2)
+{
+	<figure class="span4 " id="product" style="padding-right:10px;"> 
+<div class="product_img">
+								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
+								<span class="sale_icon"></span>
+						</div>
+						
+						<div class="first product_description">
+							<h3> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName"> @product.Name</a> </h3>
+							<p>@product.ShortDescription </p>
+							<span class="price"> @product.ProductPrice.Price @*<del> <sup>$</sup>99.50 </del>*@</span>
+						<a href="javascript:void(0)" class="btn pull-right" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink    ');return false;"> Add to Cart </a>
+						</div>
+						
+						
+						
+					</figure>
+ cnt = cnt +1;
+continue;
+}
+            	if(cnt == 2)
+{
+	<figure class="span4 " id="product" > 
+<div class="product_img">
+								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
+								<span class="sale_icon"></span>
+						</div>
+						
+						<div class="first product_description">
+							<h3> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName"> @product.Name</a> </h3>
+							<p>@product.ShortDescription </p>
+							<span class="price"> @product.ProductPrice.Price @*<del> <sup>$</sup>99.50 </del>*@</span>
+						<a href="javascript:void(0)" class="btn pull-right" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink    ');return false;"> Add to Cart </a>
+						</div>
+						
+						
+						
+					</figure>
+<hr />
+cnt = 0;
+}		
+			
+}
+					}
+					
+					</section>
+
+                    </div>
+                }
+            }
+            <div class="pager">
+                @Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber").BooleanParameterName("as").BooleanParameterName("isc").BooleanParameterName("sid")
+            </div>
+        </div>
+</div>
+</div>
+</figure>
+</section>
+			
+<div style="clear:both">&nbsp;</div>
+<!-- Page Content Container -->
+	 
+    </div>
+</div>

@@ -1,0 +1,183 @@
+﻿@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Services.Localization
+@using Nop.Web.Framework.Themes
+@{
+    //logo path
+    var currentThemeName = EngineContext.Current.Resolve<IThemeContext>().WorkingThemeName;
+    var logoPath = "~/Themes/" + currentThemeName + "/Content/images/pLogo.png";
+
+    //store name
+    var storeName = EngineContext.Current.Resolve<IStoreContext>().CurrentStore.GetLocalized(x => x.Name);
+
+    <script type="text/javascript">
+        function doDefaultSearch() {
+            alert("here");
+            var prefix = "@Request.Url.GetLeftPart(UriPartial.Authority)" + "/Search?Q=";
+            var suffix = "&As=false&Cid=0&Isc=false&Mid=0&Pf=&Pt=&Sid=false";
+            var term = document.getElementById('defaultSearch').value;
+            window.location.href = prefix + term + suffix;
+        }
+
+    </script>
+}
+
+
+
+
+<!-- Start of Header -->
+<header class="header">
+    <!-- Start Main Header -->
+    @*<section class="top_bar">
+            <section class="container-fluid container">
+                <section class="row-fluid">
+                    <article class="span6">
+                        <ul class="details">
+                            <li><i class="icon-map-marker"> </i> 5th Street, NewYork, USA</li>
+                            <li><i class="icon-mobile-phone"> </i> +00 71 900 34 45</li>
+                            <li><i class="icon-envelope-alt"> </i> @Html.Action("AdminHeaderLinks", "Common")
+        </li>
+                        </ul>
+                    </article>
+
+                    <article class="span4 offset2">
+                        <ul class="social">
+                            <li> <a href="#" class="s8"> Pintrest</a> </li>
+                            <li> <a href="#" class="s7"> Youtube</a> </li>
+                            <li> <a href="#" class="s6"> Vimeo </a> </li>
+                            <li> <a href="#" class="s5"> Twitter</a> </li>
+                            <li> <a href="#" class="s4"> RSS </a> </li>
+                            <li> <a href="#" class="s3"> Flicker</a> </li>
+                            <li> <a href="#" class="s2"> Dribble</a> </li>
+                            <li> <a href="#" class="s1"> Facebook</a> </li>
+                        </ul>
+                    </article>
+                </section>
+            </section>
+          </section>*@
+
+    <section class="logo_container">
+        <section class="container-fluid container">
+            <section class="row-fluid">
+                <section class="span4">
+                    <h1 id="logo">
+                        <a href="@Request.Url.GetLeftPart(UriPartial.Authority)">
+                            <img src="@Url.Content(logoPath)" alt="Fertility Water" />
+                        </a>
+                    </h1>
+                </section>
+
+                <section class="span5 pull-right">
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <div style="padding-bottom:20px;"><ul style="list-style-type:none;float:right;"><li style="display:inline;"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Login">Log In</a></li><li style="display:inline;"> <a href="#">&nbsp;|&nbsp;</a><li style="display:inline;"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Rgister">Register</a></li></ul></div><br />
+
+                    }
+                    @if (Request.IsAuthenticated && !User.IsInRole("Administrators"))
+                    {
+                        <div style="padding-bottom:20px;"><ul style="list-style-type:none;float:right;"><li style="display:inline;">  <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Logout">Log Out</a></li></ul></div><br />
+
+                    }
+                </section>
+                <section class="span5 pull-right">
+
+                    @Html.Action("FlyoutShoppingCart", "ShoppingCart")
+                </section>
+
+            </section>
+        </section>
+    </section>
+    <!-- Main Nav Bar -->
+    <nav id="nav">
+        <section class="container-fluid container">
+            <section class="row-fluid">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Home"))
+                                { 
+                                 <li class="active"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)"> Home </a> </li>
+                                }
+                                else
+                                {
+                                    <li > <a href="@Request.Url.GetLeftPart(UriPartial.Authority)"> Home </a> </li>
+
+                                }
+                                @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("About"))
+                                {
+                                    <li class="active">
+                                        <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/About">  About </a>
+
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/About">  About </a>
+
+                                    </li>
+                                }
+
+@if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("ShoppingCart") || @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Checkout") || @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Store"))
+{ 
+                                <li class="active">
+                                    <a class="dropdown-toggle" href="@Request.Url.GetLeftPart(UriPartial.Authority)/Store">  Store  </a>
+                                </li>
+}
+else
+                                {
+                                <li >
+                                    <a class="dropdown-toggle" href="@Request.Url.GetLeftPart(UriPartial.Authority)/Store">  Store  </a>
+                                </li>
+                                }
+                                @if (Request.IsAuthenticated && !User.IsInRole("Administrators"))
+                                {
+                                    if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Customer") || HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Order"))
+                                    {
+                                        <li class="active dropdown doHover ">
+                                            <a class="dropdown-toggle" href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Info">  My Account <b class="caret"></b> </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Info">Info</a></li>
+                                                <li><a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Orders">Orders</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown doHover">
+                                            <a class="dropdown-toggle" href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Info">  My Account <b class="caret"></b> </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Info">Info</a></li>
+                                                <li><a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Orders">Orders</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+@if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Contact"))
+{ 
+
+                                <li class="active"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Contact"> Contact </a> </li>
+}
+else
+{
+
+    <li> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Contact"> Contact </a> </li>
+}
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                    <!-- /.navbar-inner -->
+                </div>
+                <div class="nav_search pull-right">
+                    <form onsubmit="return false;"> <input type="text" placeholder="Search Here..." name="defaultSearch" id="defaultSearch" /> <button onclick="doDefaultSearch();"><i class="icon-search"></i> </button></form>
+                </div>
+                <!-- /.navbar -->
+            </section>
+        </section>
+    </nav>
+    <!-- End Main Nav Bar -->
+</header>
+<!-- End of Header -->

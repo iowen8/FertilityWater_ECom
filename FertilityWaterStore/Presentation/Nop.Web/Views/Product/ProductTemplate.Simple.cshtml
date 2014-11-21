@@ -1,0 +1,155 @@
+﻿@model ProductDetailsModel
+@using Nop.Core
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Infrastructure;
+@using Nop.Services.Localization;
+@using Nop.Web.Models.Catalog;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title, meta
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var productUrl = Url.RouteUrl("Product", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(productUrl);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        var storeName = EngineContext.Current.Resolve<IStoreContext>().CurrentStore.GetLocalized(x => x.Name);
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"product\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Html.Encode(Model.Name) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Html.Encode(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Html.Encode(storeName) + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        var storeName = EngineContext.Current.Resolve<IStoreContext>().CurrentStore.GetLocalized(x => x.Name);
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Html.Encode(storeName) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Html.Encode(Model.Name) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Html.Encode(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
+    }
+}
+<!--product breadcrumb-->
+@*@Html.Partial("_ProductBreadcrumb", Model.Breadcrumb)
+@Html.Widget("productdetails_after_breadcrumb", Model.Id)*@
+<div class="page product-details-page">
+    <div class="page-body">
+<!-- Title & BreadCrumbs -->
+        @Html.Widget("productdetails_top", Model.Id)
+        @using (Html.BeginRouteForm("Product", new { SeName = Model.SeName }, FormMethod.Post, new { id = "product-details-form" }))
+        {
+<section class="mtop">
+	<section class="container-fluid container">
+		<section class="row-fluid">
+			<section id="donation_box">
+				<section class="container container-fluid">
+					<section class="row-fluid">
+					<div class="span8 first"> <h2> Product Detail </h2> </div>
+</section>
+				</section>
+			</section>		<!-- end of Page Title -->
+	</section>
+ 		<section class="row-fluid">
+			<!-- BreadCrumbs -->
+				<figure id="breadcrumbs" class="span12">
+					<ul class="breadcrumb">
+					<li><a href="#">Home</a> <span class="divider">/</span></li>
+					<li><a href="#">Store</a> <span class="divider">/</span></li>
+					<li class="active">Product Detail </li>
+					</ul>
+				</figure>
+			<!-- End of breadcrumbs -->
+		</section>
+	</section>
+</section>
+<!-- End of Tile & Breadcrumbs -->
+
+<!-- Page Content Container -->
+<section id="content" class="mbtm product_detal">
+	<section class="container-fluid container">
+	
+		<section class="row-fluid">
+			
+	                    @Html.Widget("productdetails_before_pictures", Model.Id)
+                    <!--product pictures-->
+                    @Html.Partial("_ProductDetailsPictures", Model)
+                    @Html.Widget("productdetails_after_pictures", Model.Id)
+			
+			<figure class="span4" id="product_info">
+				<h3> @Model.Name	 </h3>
+				                        @{
+                            var dataDictPrice = new ViewDataDictionary();
+                            dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
+                          <div class="price_holder"> 
+					<span class="current_price"> Price:  @Html.Partial("_ProductPrice", Model.ProductPrice, dataDictPrice)</span>			
+				</div>           
+                          }
+				
+				<div class="description_holder"> 
+
+                        @if (!String.IsNullOrEmpty(Model.ShortDescription))
+                        {
+					                                @Html.Raw(Model.ShortDescription)
+                        }
+                            </div>
+
+					
+					
+					<ul class="stock_status">
+							
+							<li> <i class="icon-ok"></i> In Stock </li>
+							<li> Delivery 3 - 4 Working Days </li>
+					
+					</ul>
+					
+				<figure id="n_social" class="product_detail_social"> 
+				
+					<a href="#" class="fb"> <i class="icon-facebook"></i> </a> 
+					<a href="#" class="twitter"> <i class="icon-twitter"></i> </a> 
+					<a href="#" class="gplus"> <i class="icon-google-plus"></i> </a> 
+					<a href="#" class="linkedin"> <i class="icon-linkedin"></i> </a> 
+					<a href="#" class="pintrest"> <i class="icon-pinterest"></i> </a> 
+					<a href="#" class="comments"> 28 Comments </a> 
+					
+				</figure>
+				
+			</figure>
+ 
+
+				
+					
+			
+				@{
+   var dataDictAddToCart = new ViewDataDictionary();
+                            dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
+                            @Html.Partial("_AddToCartT", Model.AddToCart, dataDictAddToCart)                    
+                        }
+			
+
+			
+		</section>
+	</section>
+
+</section>
+<!-- Page Content Container -->
+
+        }
+        @Html.Widget("productdetails_bottom", Model.Id)
+    </div>
+</div>

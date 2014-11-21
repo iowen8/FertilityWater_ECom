@@ -1,0 +1,189 @@
+﻿@model OnePageCheckoutModel
+@using Nop.Web.Models.Checkout;
+@using Nop.Core.Infrastructure;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    Html.AddScriptParts("~/Scripts/public.accordion.js");
+    Html.AddScriptParts("~/Scripts/public.onepagecheckout.js");
+   Html.AddScriptParts("~/Scripts/js/cycle.js");
+   Html.AddScriptParts("~/Scripts/js/checkout.js");
+    var storeLocation = EngineContext.Current.Resolve<Nop.Core.IWebHelper>().GetStoreLocation();
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Checkout").Text);
+}
+@{
+    //step numbers
+    int billingAddressStepNumber = 1;
+    int shippingAddressStepNumber = 2;
+    int shippingMethodStepNumber = 3;
+    int paymentMethodStepNumber = 4;
+    int paymentInfoStepNumber = 5;
+    int confirmOrderStepNumber = 6;
+    if (!Model.ShippingRequired)
+    {
+        paymentMethodStepNumber = paymentMethodStepNumber - 2;
+        paymentInfoStepNumber = paymentInfoStepNumber - 2;
+        confirmOrderStepNumber = confirmOrderStepNumber - 2;
+    }
+    if (Model.DisableBillingAddressCheckoutStep)
+    {
+        shippingAddressStepNumber--;
+        shippingMethodStepNumber--;
+        paymentMethodStepNumber--;
+        paymentInfoStepNumber--;
+        confirmOrderStepNumber--;
+    }
+}
+<div class="page checkout-page">
+    <div class="page-body checkout-data">
+
+<!-- Title & BreadCrumbs -->
+<section class="mtop">
+	<section class="container-fluid container">
+		<section class="row-fluid">
+			<section id="donation_box">
+				<section class="container container-fluid">
+					<section class="row-fluid">
+					<div class="span8 first"> <h2> CheckOut </h2> </div>
+		 
+			
+				</div>
+		</div>
+					</section>
+				</section>
+			</section>		<!-- end of Page Title -->
+	</section>
+ 		<section class="row-fluid">
+			<!-- BreadCrumbs -->
+				<figure id="breadcrumbs" class="span12">
+					<ul class="breadcrumb">
+					<li><a href="#">Home</a> <span class="divider">/</span></li>
+					<li><a href="#">Store</a> <span class="divider">/</span></li>
+					<li class="active">Checkout </li>
+					</ul>
+				</figure>
+			<!-- End of breadcrumbs -->
+			<!-- End of breadcrumbs -->
+		</section>
+	</section>
+</section>
+<!-- End of Tile & Breadcrumbs -->
+
+<section id="content" class="mbtm checkout">
+	<section class="container-fluid container">
+	
+		<section class="row-fluid">
+		
+		<section id="presentation_container" class="pc_container">
+		@if (!Request.IsAuthenticated)
+        {
+            <div class="pc_item outer_lyr">
+                <div class="inner_lyr">
+<h3> Login / Registration </h3>
+
+                   <div class="span6 first check-method-left"> <strong class="green-t">Checkout as a Guest or Register</strong>
+                    <p>Register with us for future convenience:</p>
+                    <label class="radio">
+                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
+                    Checkout as Guest </label>
+                    <label class="radio">
+                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
+                    Register </label>
+                    <p>Register and save time!</p>
+                    <p>Register with us for future convenience:</p>
+                    <p>* Fast and easy check out <br>
+                      * Easy access to your order history and status</p>
+                    <a class="more-btn" href="#">Continue</a> </div>
+                  <div class="span6 check-method-right"> <strong class="green-t">Login</strong>
+                    <p>Already registered? Please log in below:</p>
+                    <form class="billing-form">
+					<li>
+                      <div class="control-group">
+                        <label for="inputEmail" class="control-label">Email Address <sup>*</sup></label>
+                        <div class="controls">
+                          <input type="text" placeholder="" id="inputEmail">
+                        </div>
+                      </div>
+                      </li> <li>
+					  <div class="control-group">
+                        <label for="inputPassword" class="control-label">Password <sup>*</sup></label>
+                        <div class="controls">
+                          <input type="password" placeholder="" id="inputPassword" /> 
+                        </div>
+                      </div>
+                    </li> <li>  <p><a href="#">Forgot your password?</a></p>
+					</li> <li>
+                      <div class="control-group">
+                        <div class="controls">
+                          <button class="more-btn" type="submit">Login</button>
+                        </div>
+                      </div>
+					  </li> 
+                    </form>
+                  </div>
+ 
+                </div>
+             </div>
+@*end 1*@
+}
+<div class="pc_item outer_lyr">
+                <div class="inner_lyr">
+                    @Html.Action("OpcShippingForm", "Checkout")
+
+
+                </div>
+             </div>
+	
+@*end2*@
+<div class="pc_item outer_lyr">
+                <div class="inner_lyr">
+                        @Html.Action("OpcPaymentMethodForm", "Checkout")
+                        @Html.Action("OpcBillingForm", "Checkout")
+
+
+                </div>
+             </div>
+	
+@*end3*@
+<div class="pc_item outer_lyr" >
+                <div class="inner_lyr">                    <div id="fCO">
+
+                        @Html.Action("OpcOrderReviewForm", "ShoppingCart")
+
+                    </div>
+
+
+                </div>
+             </div>
+	
+@*end4*@
+
+			</section>
+ 
+		</section>
+	</section>
+
+</section>
+<!-- Page Content Container -->
+      
+    </div>
+    <script type="text/javascript">
+        Accordion.init('checkout-steps', '.step-title', true);
+        Accordion.openSection('#opc-billing');
+        Checkout.init('@(storeLocation)cart/');
+        if (Billing.disableBillingAddressCheckoutStep)
+        {
+            Accordion.hideSection('#opc-billing');
+            Billing.save();
+        }
+
+    </script>
+</div>
+@Html.Raw("<"+"script type='text/javascript'>"+
+  "/* <![CDATA[ */"+
+         "presentationCycle.init();"+
+"/* ]]> */"+
+"<"+"/"+"script>"
+)
