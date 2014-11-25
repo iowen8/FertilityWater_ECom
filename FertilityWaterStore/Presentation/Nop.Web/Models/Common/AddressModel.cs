@@ -7,6 +7,7 @@ using Nop.Web.Validators.Common;
 
 namespace Nop.Web.Models.Common
 {
+        [Validator(typeof(MyPaymentValidator))]
     public class MyPaymentModel
     {
         public string CreditCardType {get; set;}

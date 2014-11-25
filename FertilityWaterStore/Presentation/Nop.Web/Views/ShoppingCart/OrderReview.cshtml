@@ -6,24 +6,72 @@
     var webHelper = EngineContext.Current.Resolve<IWebHelper>();
 }
 <script>
-    function osubmitOrder()
-    {
+    function osubmitOrder() {
         alert("submitting order");
         //disable page tp prevent
         $.ajax({
             cache: false,
             type: "POST",
             url: "@Url.Action("PlaceOrder", "ShoppingCart")",
-            data: { "place":  "true" },
+            data: { "place": "true" },
             success: function (data) {
                 alert("success");
                 alert(data.success);
-            window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/orderdetails/" + data.orderNumber;
-        },
-        error: function (data) {
-            alert('Failed.');
-        }
-    });
+                if (data.success == "true") {
+                    window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/orderdetails/" + data.orderNumber;
+                } else {
+                    $("#dMessage").html("This payment was declined. Please check your input and try again.");
+                    $("#dialog-message").dialog({
+                        autoOpen: true,
+                        show: {
+                            effect: "blind",
+                            duration: 1000
+                        },
+                        hide: {
+                            effect: "explode",
+                            duration: 1000
+                        },
+                        title: "Payment Error",
+                        modal: true,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                    alert("setting max");
+                    presentationCycle.setMaxEnabled(2);
+                    alert("switching");
+                    presentationCycle.gotoSlide(2);
+                }
+            },
+            error: function (data) {
+                alert('Failed.');
+                $("#dMessage").html("This payment was declined. Please check your input and try again.");
+                $("#dialog-message").dialog({
+                    autoOpen: true,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000
+                    },
+                    title: "Payment Error",
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                alert("setting max");
+                presentationCycle.setMaxEnabled(2);
+                alert("switching");
+                presentationCycle.gotoSlide(2);
+            }
+        });
     }
 </script>
 <div class="order-summary-content">

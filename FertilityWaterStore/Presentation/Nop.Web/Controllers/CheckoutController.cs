@@ -2002,16 +2002,17 @@ namespace Nop.Web.Controllers
                 FormCollection fc = new FormCollection();
                 
                 AddressModel amodel = (AddressModel)serializer.Deserialize(formcollection, typeof(AddressModel));
+                amodel.CountryId = 1;
                 MyPaymentModel cmodel = (MyPaymentModel)serializer.Deserialize(cardcollection, typeof(MyPaymentModel));
 
                 amodel.FirstName = cmodel.CardholderName.Split(' ').First();
                 amodel.LastName = cmodel.CardholderName.Split(' ').Last();
-                fc.Add("CreditCardType", cmodel.CreditCardType);
-                fc.Add("CardholderName", cmodel.CardholderName);
-                fc.Add("CardNumber", cmodel.CardNumber);
+                fc.Add("CreditCardType", cmodel.CreditCardType.Trim());
+                fc.Add("CardholderName", cmodel.CardholderName.Trim());
+                fc.Add("CardNumber", cmodel.CardNumber.Trim());
                 fc.Add("ExpireMonth", cmodel.ExpireMonth.ToString());
                 fc.Add("ExpireYear", cmodel.ExpireYear.ToString());
-                fc.Add("CardCode", cmodel.CardCode);
+                fc.Add("CardCode", cmodel.CardCode.Trim());
                 //validation
                 var cart = _workContext.CurrentCustomer.ShoppingCartItems
                     .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
@@ -2114,7 +2115,7 @@ namespace Nop.Web.Controllers
 
             catch (Exception ex)
             { }
-            return Json(new { success = "true" });
+            return Json(new { success = "false" });
 
         }
 
@@ -2190,8 +2191,9 @@ namespace Nop.Web.Controllers
         {
             //var form = formcollection;
             System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-
+           
             AddressModel amodel = (AddressModel)serializer.Deserialize(formcollection, typeof(AddressModel));
+            amodel.CountryId = 1;
              try
             {
                 //validation
@@ -2253,11 +2255,7 @@ namespace Nop.Web.Controllers
                         shippingAddressModel.NewAddressPreselected = true;
                         return Json(new
                         {
-                            update_section = new UpdateSectionJsonModel()
-                            {
-                                name = "shipping",
-                                html = this.RenderPartialViewToString("OpcShippingAddress", shippingAddressModel)
-                            }
+                                success = "false"
                         });
                     }
 
@@ -2278,7 +2276,7 @@ namespace Nop.Web.Controllers
                             address.CountryId = null;
                         if (address.StateProvinceId == 0)
                             address.StateProvinceId = null;
-                        _workContext.CurrentCustomer.Addresses.Add(address);
+                      //  _workContext.CurrentCustomer.Addresses.Add(address);
                     
                     _workContext.CurrentCustomer.ShippingAddress = address;
                  // Unless specifically asked to save ignore    _customerService.UpdateCustomer(_workContext.CurrentCustomer);
@@ -2301,11 +2299,26 @@ namespace Nop.Web.Controllers
 .LimitPerStore(_storeContext.CurrentStore.Id)
 .ToList();
                 var shippingMethodModel = PrepareShippingMethodModel(cart);
-                return PartialView("OpcShippingMethods", shippingMethodModel);
+                if (shippingMethodModel.Warnings.Count == 0)
+                { 
+                    return Json(new {
+                        success="true",
+                        html = this.RenderPartialViewToString("OpcShippingMethods", shippingMethodModel)
+                });
+                }
+                return Json(new
+                {
+                    success = "false",
+                    html = this.RenderPartialViewToString("OpcShippingMethods", shippingMethodModel)
+                });
             }
             catch (Exception ex)
             {
-                return Content("");
+                return Json(new
+                {
+                    success = "false",
+                    html=""
+                });
             }
         }
         [ValidateInput(false)]

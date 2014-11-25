@@ -8,13 +8,14 @@
     {
         $("#shippingoption").val(opt);
         alert($("#shippingoption").val());
-        var oldId = "shippingoptiondiv_" + selectedMethod;
-        var newId = "shippingoptiondiv_" + sid;
-        alert(oldId + " -- " + newId); 
-      //  document.getElementById(oldId).className = "accordion-toggle";
-        $("#" + newId).addClass("active");
-       // document.getElementById("\"" + newId + "\"").className = "accordion-toggle active";
+        var oldId = "#shippingoptiondiv_" + selectedMethod;
+        var newId = "#shippingoptiondiv_" + sid;
+        alert(oldId + " -- " + newId);
+        $(oldId).css("background-color", "#e2e2e2");
+        alert("1");
+        $(newId).css("background-color", "#1DB2B8");
         selectedMethod = sid;
+        alert("done");
     }
     function testThis()
     {
@@ -28,6 +29,9 @@
             alert(d.success);
             if(d.success == "true")
             {
+                alert("setting max");
+                presentationCycle.setMaxEnabled(2);
+                alert("switching");
                 presentationCycle.gotoSlide(2);
 
             }
@@ -54,8 +58,8 @@
                 <div class="method-name accordion-heading" onclick="setShippingOption('@_name', @(i))" >
                     @if (shippingMethod.Selected)
                     {
-                        <a class="accordion-toggle active" data-toggle="collapse" id="shippingoptiondiv_@(i)"  data-parent="#accordion@(i)" href="#collapse@(i)">
-                            <span class="toggle_faq" style="width: 2%;margin-right: 1%;display:inline; float:left;"><i class="icon-chevron-right"></i> </span>
+                        <a class="accordion-toggle active" data-toggle="collapse"  data-parent="#accordion2" href="#collapse@(i)">
+                            <span class="toggle_faq" id="shippingoptiondiv_@(i)"  style="width: 2%;margin-right: 1%;display:inline; float:left;"><i class="icon-chevron-right"></i> </span>
                             <h3 style="width:95.5%; display:inline; float:left; margin-top:12px">	<strong> @T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</strong>	<h3>
                         </a>
                         <script>
@@ -65,11 +69,12 @@
 
                     @if (!shippingMethod.Selected)
                     {
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion@(i)" href="#collapse@(i)" id="shippingoptiondiv_@(i)">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse@(i)" >
 
-                            <span class="toggle_faq" style="background-color:#e2e2e2;width: 2%;margin-right: 1%; display:inline; float:left;"><i class="icon-chevron-right"></i> </span>
-                            <h3 style="width:95.5%; display:inline; float:left; margin-top:12px">	<strong> @T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</strong>	<h3>
-                        </a>
+                            <span class=" toggle_faq" id="shippingoptiondiv_@(i)" style=" background-color:#e2e2e2;width: 2%;margin-right 1%; display:inline; float:left;">
+        <i class="icon-chevron-right"></i> </span>
+        <h3 style="width:95.5%; display:inline; float:left; margin-top:12px">	<strong> @T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</strong>	<h3>
+    </a>
                     }
 
                 </div>

@@ -3,7 +3,7 @@
     @Html.Widget("op_checkout_payment_method_top")
 <style>
 .use-reward-points{margin:0;padding:10px;color:#555;background:#F7F5E8;margin-bottom:10px;border:dotted 1px #d3d3d3;}
- .payment-method{text-align:left;border: 1px solid #EEE;height:auto;}
+ .payment-method{text-align:left; height:auto;}
  .payment-method li{padding:10px;text-align:left;vertical-align:text-top; list-style:none;}
  .payment-method .method-name{clear:both;}
  .payment-method .method-name:after{content:".";display:block;clear:both;height:0;font-size:0;line-height:0;visibility:hidden;}
@@ -12,6 +12,7 @@
  .payment-method .buttons{margin:10px;text-align:left;}
  .payment-method .message-error{margin:10px;text-align:left;}
 </style>
+
 				<figure class="span6 first">
 
 <h3> Payment Method </h3>
@@ -53,7 +54,7 @@
                         @if(@paymentMethodName == "Credit Card")
                         {
                         <div id="cardInfoDiv">
-                            <form id="bMethodForm">
+                            <form id="bMethodForm" onsubmit="return false;">
                                 <div>
                                     <label>Card Type : </label>
                                     <select id="CreditCardType" name="CreditCardType">
@@ -63,13 +64,183 @@
                                         <option value="amex">American Express</option>
                                     </select>
                                 </div>
-                                <label>Card Holder Name</label> <input type="text" id="CardholderName" name="CardholderName" />
-                                <label>Card Number</label> <input type="text" id="CardNumber" name="CardNumber" />
-                                <label>CVV</label> <input type="text" id="CardCode" name="CardCode" />
-                                <label>Exp. Month</label> <input type="text" id="ExpireMonth" name="ExpireMonth" />
-                                <label>Exp. Year</label> <input type="text" id="ExpireYear" name="ExpireYear" />
+                               <label>Card Holder Name</label> <input type="text" id="CardholderName" name="CardholderName" required />
+                                <label>Card Number</label> <input type="text" id="CardNumber" name="CardNumber" required />
+                                <label>CVV</label> <input type="text" id="CardCode" name="CardCode" required />
+                                <label>Exp. Month</label> <select id="ExpireMonth" name="ExpireMonth">
+                                                              <option value="01">01</option>
+                                                              <option value="02">02</option>
+                                                              <option value="03">03</option>
+                                                              <option value="04">04</option>
+                                                              <option value="05">05</option>
+                                                              <option value="06">06</option>
+                                                              <option value="07">07</option>
+                                                              <option value="08">08</option>
+                                                              <option value="09">09</option>
+                                                              <option value="10">10</option>
+                                                              <option value="11">11</option>
+                                                              <option value="12">12</option>
+                                </select>
+                                <label>Exp. Year (YYYY)</label> <input type="text" id="ExpireYear" name="ExpireYear" required />
                             </form>
+                            <input type="hidden" id="CardNumberChecker" name="CardNumberChecker" />
                         </div>
+                        <script>
+                            $("#ExpireYear").blur(function () {
+                                var eM = $("#ExpireMonth").val();
+                                var eY = $("#ExpireYear").val();
+                                alert(eM + "/" + eY);
+                                var d = new Date();
+                                var m = d.getMonth();
+                                var y = d.getFullYear();
+                                alert(m + "/" + y);
+
+                                if (eY > y)
+                                    return;
+                                if (eY == y && eM >= m)
+                                    return;
+                                $("#ExpireYear").val("");
+                                $("#dMessage").html("Invalid Experation Date.");
+                                $("#dialog-message").dialog({
+                                    autoOpen: true,
+                                    show: {
+                                        effect: "blind",
+                                        duration: 1000
+                                    },
+                                    hide: {
+                                        effect: "explode",
+                                        duration: 1000
+                                    },
+                                    title: "Credit Card Error",
+                                    modal: true,
+                                    buttons: {
+                                        Ok: function () {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
+                            });
+                            $("#CardCode").blur(function () {
+                                var cde = $("#CardCode").val();
+                                var cT = $("#CreditCardType").val();
+                                if (cT == "amex")
+                                {
+                                    if (cde.length != 4)
+                                    {
+                                        
+                                        $("#CardCode").val("");
+                                        $("#dMessage").html("Invalid CVV code.");
+                                        $("#dialog-message").dialog({
+                                            autoOpen: true,
+                                            show: {
+                                                effect: "blind",
+                                                duration: 1000
+                                            },
+                                            hide: {
+                                                effect: "explode",
+                                                duration: 1000
+                                            },
+                                            title: "Credit Card Error",
+                                            modal: true,
+                                        buttons: {
+                                            Ok: function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
+                                    }
+                                    return;
+                                }
+                                else if (cde.length != 3)
+                                {
+                                    $("#CardCode").val("");
+                                    $("#dMessage").html("Invalid CVV code.");
+                                    $("#dialog-message").dialog({
+                                        autoOpen: true,
+                                        show: {
+                                            effect: "blind",
+                                            duration: 1000
+                                        },
+                                        hide: {
+                                            effect: "explode",
+                                            duration: 1000
+                                        },
+                                        title: "Credit Card Error",
+                                        modal: true,
+                                        buttons: {
+                                            Ok: function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+
+                            $("#CardNumber").blur(function () {
+                                alert("hh");
+                                var v = $("#CardNumber").val();
+                                alert(v);
+                                $("#CardNumberChecker").val(v);
+                                alert($("#CardNumberChecker").val());
+
+                                $("#CardNumberChecker").validateCreditCard(function (result) {
+                                 
+                                    if (!result.length_valid) {
+                                        $("#CardNumber").val("");
+                                        $("#dMessage").html("Invalid Card number length..");
+                                        $("#dialog-message").dialog({
+                                            autoOpen: true,
+                                            show: {
+                                                effect: "blind",
+                                                duration: 1000
+                                            },
+                                            hide: {
+                                                effect: "explode",
+                                                duration: 1000
+                                            },
+                                            title: "Credit Card Error",
+                                            modal: true,
+                                            buttons: {
+                                                Ok: function () {
+                                                    $(this).dialog("close");
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else if (result.luhn_valid) {
+                                        var cT = $("#CreditCardType").val();
+                                        alert(cT);
+                                        alert(result.card_type.name);
+                                        if (cT == result.card_type.name)
+                                            return;
+                                        $("#CardNumber").val("");
+                                        $("#dMessage").html("Invalid card number format for brand.");
+                                        $("#dialog-message").dialog({
+                                            autoOpen: true,
+                                            show: {
+                                                effect: "blind",
+                                                duration: 1000
+                                            },
+                                            hide: {
+                                                effect: "explode",
+                                                duration: 1000
+                                            },
+                                            title: "Credit Card Error",
+                                            modal: true,
+                                            buttons: {
+                                                Ok: function () {
+                                                    $(this).dialog("close");
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        alert(result.name);
+                                    }
+                                });
+                            });
+                            
+                        </script>
                         }
                     </li>
                 }

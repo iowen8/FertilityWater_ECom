@@ -1,10 +1,9 @@
 ﻿@model OrderTotalsModel
 @using Nop.Web.Models.ShoppingCart;
-	  <tr>
-					<td colspan="4" width="85%">  Estimated Shipping: </td>
-					<td colspan="2" width="15%" class="b_price"> @Model.Shipping </td>
- 				</tr>
-				
+
+				@{
+                    var ttl = decimal.Parse(Model.Tax.Replace("$", "").Replace(",", "")) + decimal.Parse(Model.SubTotal.Replace("$", "").Replace(",", ""));
+				}
 				<tr>
 					<td colspan="4" width="85%" class="">  Sales Tax: </td>
                     
@@ -15,10 +14,10 @@
                 </tbody>
 					<tfoot>
 							<tr>
-								<td colspan="4" width="85%">  Enter Coupon Code: <input type="text" value="ED03321" class="coupon" /> <a href="#" class="cbtn"> Update </a> </td>
+								<td colspan="4" width="85%"> &nbsp;</td>
 								<td colspan="2" width="15%" class="total_price"> 
-								<div class="total"> TOTAL </div>
-								@Model.OrderTotal
+								<div class="total">SUB TOTAL </div>
+								@string.Format("{0:C}", ttl)
 								</td>
 							</tr>
 					</tfoot>

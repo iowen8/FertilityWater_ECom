@@ -87,12 +87,8 @@ var item = Model.Items[i];
                                         <div class="product_name">
                                             <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })">@item.ProductName</a>
                                         </div>
-                                        <div class="quantity"> Quantity <input type="text" value="@item.Quantity" /></div>
-                                        <div class="actions">
-                                            <a href="#"> 	<i class="icon-caret-up"></i>	</a>
-                                            <a href="#"> 	<i class="icon-caret-down"></i>	</a>
-                                            <a href="#"> 	<i class="icon-trash"></i>		</a>
-                                        </div>
+                                        <div class="quantity"> Quantity :  <strong>@item.Quantity</strong></div>
+              
                                     </li>
 }
 

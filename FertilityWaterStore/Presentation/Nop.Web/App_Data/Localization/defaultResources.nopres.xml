@@ -768,6 +768,9 @@
   <LocaleResource Name="Address.Fields.FirstName">
     <Value>First name</Value>
   </LocaleResource>
+  <LocaleResource Name="MyPayment.Fields.CardholderName.Required">
+    <Value>Cardholder's name is required.</Value>
+  </LocaleResource>
   <LocaleResource Name="Address.Fields.FirstName.Required">
     <Value>First name is required.</Value>
   </LocaleResource>
@@ -10375,7 +10378,7 @@
     <Value>The characters didn't match the picture. Please try again.</Value>
   </LocaleResource>
   <LocaleResource Name="Common.WrongEmail">
-    <Value>Wrong email</Value>
+    <Value>Invalid Email Address</Value>
   </LocaleResource>
   <LocaleResource Name="Common.Year">
     <Value>Year</Value>
@@ -11662,7 +11665,7 @@
     <Value>Enter card code</Value>
   </LocaleResource>
   <LocaleResource Name="Payment.CardCode.Wrong">
-    <Value>Wrong card code</Value>
+    <Value>Invalid card code</Value>
   </LocaleResource>
   <LocaleResource Name="Payment.CardholderName">
     <Value>Cardholder name</Value>
@@ -11677,7 +11680,7 @@
     <Value>Enter card number</Value>
   </LocaleResource>
   <LocaleResource Name="Payment.CardNumber.Wrong">
-    <Value>Wrong card number</Value>
+    <Value>Invalid card number</Value>
   </LocaleResource>
   <LocaleResource Name="Payment.ExpirationDate">
     <Value>Expiration date</Value>
@@ -11685,8 +11688,14 @@
   <LocaleResource Name="Payment.ExpireMonth.Required">
     <Value>Expire month is required</Value>
   </LocaleResource>
+  <LocaleResource Name="Payment.ExpireMonth.Wrong">
+    <Value>Invalid Expiration Month</Value>
+  </LocaleResource>
   <LocaleResource Name="Payment.ExpireYear.Required">
     <Value>Expire year is required</Value>
+  </LocaleResource>
+  <LocaleResource Name="Payment.ExpireYear.Wrong">
+    <Value>Invalid Expiration Year.</Value>
   </LocaleResource>
   <LocaleResource Name="Payment.SelectCreditCard">
     <Value>Select credit card</Value>

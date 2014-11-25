@@ -2,6 +2,9 @@
 @using Nop.Core.Infrastructure
 @using Nop.Services.Localization
 @using Nop.Web.Framework.Themes
+@using Nop.Core.Domain.Customers;
+@using Nop.Core.Infrastructure;
+@using Nop.Services.Customers;
 @{
     //logo path
     var currentThemeName = EngineContext.Current.Resolve<IThemeContext>().WorkingThemeName;
@@ -70,12 +73,18 @@
                 <section class="span5 pull-right">
                     @if (!Request.IsAuthenticated)
                     {
-                        <div style="padding-bottom:20px;"><ul style="list-style-type:none;float:right;"><li style="display:inline;"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Login">Log In</a></li><li style="display:inline;"> <a href="#">&nbsp;|&nbsp;</a><li style="display:inline;"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Rgister">Register</a></li></ul></div><br />
+
+                        <div style="padding-bottom:20px;"><ul style="list-style-type:none;float:right;"><li style="display:inline;"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Login">Log In</a></li><li style="display:inline;"> <a href="#">&nbsp;|&nbsp;</a><li style="display:inline;"> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Register">Register</a></li></ul></div><br />
 
                     }
-                    @if (Request.IsAuthenticated && !User.IsInRole("Administrators"))
+                    @if (Request.IsAuthenticated && EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.IsInCustomerRole("Registered") && !EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.IsInCustomerRole("Administrators"))
                     {
                         <div style="padding-bottom:20px;"><ul style="list-style-type:none;float:right;"><li style="display:inline;">  <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Logout">Log Out</a></li></ul></div><br />
+
+                    }
+                    @if (Request.IsAuthenticated && EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.IsInCustomerRole("Administrators"))
+                    {
+                        <div style="padding-bottom:20px;"><ul style="list-style-type:none;float:right;"><li style="display:inline;">  <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/admin">Admin</a></li><li style="display:inline;"><a href="#">&nbsp;|&nbsp;</a><li style="display:inline;">   <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Logout">Log Out</a></li></ul></div><br />
 
                     }
                 </section>

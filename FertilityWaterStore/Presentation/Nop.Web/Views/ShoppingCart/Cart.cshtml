@@ -7,10 +7,7 @@
     //title
     Html.AddTitleParts(T("PageTitle.ShoppingCart").Text);
 }
-@if (!Model.OnePageCheckoutEnabled)
-{
-    @Html.Action("CheckoutProgress", "Checkout", new {step = CheckoutProgressStep.Cart})
-}
+
 <div class="page shopping-cart-page">
     <div class="page-body">
 <!-- Title & BreadCrumbs -->

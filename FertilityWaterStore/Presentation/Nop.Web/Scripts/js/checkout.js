@@ -29,6 +29,7 @@ var presentationCycle = {
     //variables this script need
     itemCount: 0,
     currentItem: 0,
+    maxEnabled:0,
     itemBarWidth: 0,
     barContainer: "",
     barContainerActive: "",
@@ -38,7 +39,7 @@ var presentationCycle = {
     init: function() {
 	
         presentationCycle.itemCount = $('#' + presentationCycle.containerId).children().length;
-
+        presentationCycle.maxEnabled = 1;
         presentationCycle.barContainer = $("<div></div>");
         $(presentationCycle.barContainer).addClass("pc_bar_container");
         
@@ -138,6 +139,12 @@ var presentationCycle = {
         });
     },
     
+
+    setMaxEnabled: function (max) {
+       // alert(max);
+        presentationCycle.maxEnabled = max;
+     //   alert(presentationCycle.maxEnabled);
+},
     beforeSlide: function(currSlideElement, nextSlideElement) {
         if (presentationCycle.currentItem == 0) {
             presentationCycle.currentItem = 1;
@@ -165,15 +172,19 @@ var presentationCycle = {
         }
     },
     
-    gotoSlide: function(itemNr) {
+    gotoSlide: function (itemNr) {
+      
         $(presentationCycle.barContainerOverflow).stop();
         presentationCycle.disableAnimation = true;
+        if (itemNr > presentationCycle.maxEnabled)
+            return;
         $('#' + presentationCycle.containerId).cycle((itemNr - 1));
         $('#' + presentationCycle.containerId).cycle('pause');
 			$('#next1').click(function() {
     presentationCycle.gotoSlide($(this).attr('itemNr'));
     });
     }
+    
 	
     
 }

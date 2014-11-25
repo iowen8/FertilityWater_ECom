@@ -364,6 +364,7 @@
     <Compile Include="Validators\Boards\EditForumTopicValidator.cs" />
     <Compile Include="Validators\Catalog\ProductEmailAFriendValidator.cs" />
     <Compile Include="Validators\Catalog\ProductReviewsValidator.cs" />
+    <Compile Include="Validators\Common\MyPaymentValidator.cs" />
     <Compile Include="Validators\Common\AddressValidator.cs" />
     <Compile Include="Validators\Install\InstallValidator.cs" />
     <Compile Include="Validators\News\NewsItemValidator.cs" />
@@ -1049,6 +1050,8 @@
     <Content Include="Scripts\js\fitvids.js" />
     <Content Include="Scripts\js\html5shiv.js" />
     <Content Include="Scripts\js\ie8_fix_maxwidth.js" />
+    <Content Include="Scripts\js\jquery.creditCardValidator.js" />
+    <Content Include="Scripts\js\jquery.dataTables.js" />
     <Content Include="Scripts\js\lib-1-3-2.js" />
     <Content Include="Scripts\js\lib-1-6-1.js" />
     <Content Include="Scripts\js\lib-1-7-1.js" />
@@ -1954,6 +1957,7 @@
     <Content Include="Themes\FertilityTheme\Content\css\font-awesome.css" />
     <Content Include="Themes\FertilityTheme\Content\css\font-awesome.min.css" />
     <Content Include="Themes\FertilityTheme\Content\css\gallery_widget.css" />
+    <Content Include="Themes\FertilityTheme\Content\css\jquery.dataTables.css" />
     <Content Include="Themes\FertilityTheme\Content\css\nj.css" />
     <Content Include="Themes\FertilityTheme\Content\css\prettyPhoto.css" />
     <Content Include="Themes\FertilityTheme\Content\css\skins\default.css" />
@@ -1975,6 +1979,9 @@
     <Content Include="Themes\FertilityTheme\Content\images\ajax_loader_small.gif" />
     <Content Include="Themes\FertilityTheme\Content\images\arrow-up.png" />
     <Content Include="Themes\FertilityTheme\Content\images\author_img.jpg" />
+    <Content Include="Themes\FertilityTheme\Content\images\back_disabled.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\back_enabled.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\back_enabled_hover.png" />
     <Content Include="Themes\FertilityTheme\Content\images\bbeditor-button-bg.gif" />
     <Content Include="Themes\FertilityTheme\Content\images\bgimg.jpg" />
     <Content Include="Themes\FertilityTheme\Content\images\bg_counter.png" />
@@ -2021,6 +2028,9 @@
     <Content Include="Themes\FertilityTheme\Content\images\feature_img_4_hover.png" />
     <Content Include="Themes\FertilityTheme\Content\images\forum-footer-bg.gif" />
     <Content Include="Themes\FertilityTheme\Content\images\forum-header-bg.gif" />
+    <Content Include="Themes\FertilityTheme\Content\images\forward_disabled.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\forward_enabled.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\forward_enabled_hover.png" />
     <Content Include="Themes\FertilityTheme\Content\images\free-shipping.png" />
     <Content Include="Themes\FertilityTheme\Content\images\gallery_img1.jpg" />
     <Content Include="Themes\FertilityTheme\Content\images\gallery_img2.jpg" />
@@ -2194,6 +2204,11 @@
     <Content Include="Themes\FertilityTheme\Content\images\social\twitter0.png" />
     <Content Include="Themes\FertilityTheme\Content\images\social\vimeo.png" />
     <Content Include="Themes\FertilityTheme\Content\images\social\youtube.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\sort_asc.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\sort_asc_disabled.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\sort_both.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\sort_desc.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\sort_desc_disabled.png" />
     <Content Include="Themes\FertilityTheme\Content\images\star-x-active.png" />
     <Content Include="Themes\FertilityTheme\Content\images\star-x-inactive.png" />
     <Content Include="Themes\FertilityTheme\Content\images\store1.jpg" />

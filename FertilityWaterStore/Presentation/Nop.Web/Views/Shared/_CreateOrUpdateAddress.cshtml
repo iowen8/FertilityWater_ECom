@@ -68,7 +68,7 @@
         var s = '';
         var sdata = {};
         for (s in serialized) {
-            sdata[serialized[s]['name']] = serialized[s]['value']
+            sdata[serialized[s]['name']] = serialized[s]['value'].trim();
         }
         var collection = JSON.stringify(sdata);
         alert("submitting");
@@ -78,13 +78,67 @@
             data: { formcollection: collection }, // serializes the form's elements.
             dataType: "text",
             success: function (data) {
+                var da = JSON.parse(data);
                 alert(data); // show response from the php script.
-                $("#targetShipping").html(data);
+                if (da.success == "true")
+                {
+                    $("#targetShipping").html(da.html);
+                }
+                else {
+                    alert("failure");
+                    $("#dMessage").html("Invalid Address!. Please check your input and try again.");
+                    $("#dialog-message").dialog({
+                        autoOpen: true,
+                        show: {
+                            effect: "blind",
+                            duration: 1000
+                        },
+                        hide: {
+                            effect: "explode",
+                            duration: 1000
+                        },
+                        title: "Address Error",
+                        modal: true,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                }
+            },
+            error: function (data) {
+                $("#dialog-message").dialog({
+                    autoOpen: true,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000
+                    },
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                }); 
             }
         });
         return false; // avoid to execute the actual submit of the form.
     }
 
+        function ShipRatesDisable()
+        {
+            var h = $("#targetShipping").html();
+            if (h.trim() != "") {
+                var d = "<h3> Address was edited please submit for valid rates</h3>"
+               
+                $("#targetShipping").html(d);
+            }
+        }
   </script>
 }
 @Html.HiddenFor(model => model.Id)
@@ -96,7 +150,7 @@
 
 <h3> Shipping Information </h3>
 @*                 	<strong class="green-t">Checkout as Guest</strong>*@
-                    <form class="" action="#" method="post" id="shipAddressForm" onsubmit="return false;">
+                    <form class="" action="#" method="post" id="shipAddressForm" onsubmit="return false;" onchange="ShipRatesDisable();">
 					<ul class="billing-form">
                             <li>   
                               <div class="control-group">
@@ -152,6 +206,7 @@
                                         @Html.RequiredHint()
                                         @Html.ValidationMessageFor(model => model.CountryId)
                                     </div>
+
                                 </div>  
                               <div class="control-group">
             @Html.LabelFor(model => model.City, new { @class="control-label"}, ":")
@@ -175,6 +230,12 @@
                                         <span id="states-loading-progress1" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
                                         @Html.ValidationMessageFor(model => model.StateProvinceId)
                                     </div>
+                                    <script>
+    $("#countryS").val(1);
+    $("#countryS").prop('disabled', true);
+    GetStates();
+                                    </script>
+
                                 </div>
                               <div class="control-group">
             @Html.LabelFor(model => model.ZipPostalCode, new {@class="control-label" }, ":")
@@ -237,7 +298,7 @@
         
         var sdata = {};
         for (s in serialized) {
-            sdata[serialized[s]['name']] = serialized[s]['value']
+            sdata[serialized[s]['name']] = serialized[s]['value'].trim();
         }
       
         var collectionB = JSON.stringify(sdata);
@@ -253,6 +314,7 @@
         var collectionC = JSON.stringify(sdata);
         alert(collectionC);
         alert("submitting");
+  
         $.ajax({
             type: "POST",
             url: "@Url.Action("SaveBillingInfo", "Checkout")",
@@ -261,9 +323,16 @@
         success: function (data) {
             var d = JSON.parse(data);
             alert(d.success);
-            alert(d.html);
-            $("#fCO").html(d.html);
-            presentationCycle.gotoSlide(3);
+            if (d.success == "true") {
+                alert(d.html);
+                $("#fCO").html(d.html);
+                alert("setting max");
+                presentationCycle.setMaxEnabled(3);
+                alert("switching");
+                presentationCycle.gotoSlide(3);
+            }
+            else
+                return false;
 
         },
         error: function (data)
@@ -410,6 +479,10 @@
 				</figure>
 <script>
     setCardHolderName();
+$("#country").val(1);
+    $("#country").prop('disabled', true);
+    GetStatesB();
+   
 </script>
 
         }

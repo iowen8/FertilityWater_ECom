@@ -232,6 +232,7 @@ namespace Nop.Web.Controllers
         public ActionResult PlaceOrder(string place)
         {
                             PlaceOrderResult placeOrderResult = new Nop.Services.Orders.PlaceOrderResult();
+                            bool paid = false;
 
             try
             {
@@ -277,7 +278,7 @@ namespace Nop.Web.Controllers
                 billingAddress.state = _workContext.CurrentCustomer.BillingAddress.StateProvince.Abbreviation;
 
                 CreditCard creditCard = new PayPal.Api.Payments.CreditCard();
-                creditCard.number = processPaymentRequest.CreditCardNumber;
+                creditCard.number = processPaymentRequest.CreditCardNumber.Trim();
                 creditCard.type = processPaymentRequest.CreditCardType;
                 creditCard.expire_month = processPaymentRequest.CreditCardExpireMonth;
                 creditCard.expire_year = processPaymentRequest.CreditCardExpireYear;
@@ -299,7 +300,7 @@ namespace Nop.Web.Controllers
 
                 Transaction transaction = new PayPal.Api.Payments.Transaction();
                 transaction.amount = amount;
-                transaction.description = "This is the payment transaction description.";
+                transaction.description = "TPurchase from Fertility Alkaline Water.";
 
                 List<PayPal.Api.Payments.Transaction> transactions = new List<PayPal.Api.Payments.Transaction>();
                 transactions.Add(transaction);
@@ -320,26 +321,35 @@ namespace Nop.Web.Controllers
                 payment.transactions = transactions;
 
                 PayPal.Api.Payments.Payment createdPayment = payment.Create(accessToken);
-                var outp = createdPayment;
-                processPaymentRequest.CustomerId = _workContext.CurrentCustomer.Id;
-                processPaymentRequest.StoreId = cart.First().StoreId;
-                processPaymentRequest.PaymentMethodSystemName = selectedPaymentMethodSystemName;
-                if (processPaymentRequest.OrderGuid == Guid.Empty)
-                   processPaymentRequest.OrderGuid = Guid.NewGuid();
-                var os = (OrderProcessingService)_orderProcessingService;
-              placeOrderResult = os.ProcessPaymentM(createdPayment.id, createdPayment.intent, createdPayment.state, cart, processPaymentRequest);
-
+                if (createdPayment.state == "approved")
+                {
+                    paid = true;
+                    var outp = createdPayment;
+                    processPaymentRequest.CustomerId = _workContext.CurrentCustomer.Id;
+                    processPaymentRequest.StoreId = cart.First().StoreId;
+                    processPaymentRequest.PurchaseOrderNumber = null;
+                    processPaymentRequest.PaymentMethodSystemName = selectedPaymentMethodSystemName;
+                    if (processPaymentRequest.OrderGuid == Guid.Empty)
+                        processPaymentRequest.OrderGuid = Guid.NewGuid();
+                    var os = (OrderProcessingService)_orderProcessingService;
+                    placeOrderResult = os.ProcessPaymentM(createdPayment.id, createdPayment.intent, createdPayment.state, cart, processPaymentRequest);
+                }
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                return Json(new
+                {
+                    success = "false",
+                    orderNumber = placeOrderResult.PlacedOrder.Id
+                });
             }
 
 
             return Json(new
             {
-                success = "true",
+                success = paid.ToString(),
                 orderNumber = placeOrderResult.PlacedOrder.Id
             });
         }
