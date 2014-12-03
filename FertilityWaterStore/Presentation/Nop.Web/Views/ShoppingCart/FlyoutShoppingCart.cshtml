@@ -74,7 +74,9 @@
 						</a>
 						
 						<div class="dropdown-menu" aria-labelledby="cart_down" role="menu" id="cart_down_content" >
-                            <ul id="cart" style="max-height:309px;overflow-y:scroll;">
+@if (Model.Items.Count > 0)
+{
+                            <ul id="cart" style="max-height:309px;overflow-y:auto;">
                                 @for (int i = 0; i < Model.Items.Count; i++)
                 {
 var item = Model.Items[i];
@@ -93,13 +95,20 @@ var item = Model.Items[i];
 }
 
                             </ul>
-									<div class="cart_total_checkout"> 
-									<span class="pull-left col1"> Sub Total $ </span> 
-									<span class="pull-left col1"> @Model.SubTotal </span> 
-									
-									<a href="@Request.Url.GetLeftPart(UriPartial.Authority)/ShoppingCart/Cart" class="pull-right continue_shopping"> Checkout </a>
+                                       
+                                            <div class="cart_total_checkout">
 
-									</div>
+                                                <span class="pull-left col1"> Sub-Total: &nbsp;  </span>
+                                                <span class="pull-left col1">&nbsp;&nbsp;&nbsp;@Model.SubTotal </span>
+
+                                                <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/ShoppingCart/Cart" class="pull-right continue_shopping"> Checkout </a>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                        <h3 class="pull-left">&nbsp;&nbsp;There are no items in your cart.</h3>
+                                                }
 						</div>
 				</div>
     </div></div>

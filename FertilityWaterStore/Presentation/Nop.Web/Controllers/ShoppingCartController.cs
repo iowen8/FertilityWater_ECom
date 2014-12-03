@@ -278,7 +278,7 @@ namespace Nop.Web.Controllers
                 billingAddress.state = _workContext.CurrentCustomer.BillingAddress.StateProvince.Abbreviation;
 
                 CreditCard creditCard = new PayPal.Api.Payments.CreditCard();
-                creditCard.number = processPaymentRequest.CreditCardNumber.Trim();
+                creditCard.number = processPaymentRequest.CreditCardNumber.Trim().Replace(" ","");
                 creditCard.type = processPaymentRequest.CreditCardType;
                 creditCard.expire_month = processPaymentRequest.CreditCardExpireMonth;
                 creditCard.expire_year = processPaymentRequest.CreditCardExpireYear;

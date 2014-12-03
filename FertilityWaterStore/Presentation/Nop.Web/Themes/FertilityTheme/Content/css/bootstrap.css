@@ -1203,12 +1203,17 @@ legend small {
 }
 label,
 input,
-button,
 select,
 textarea {
   font-size: 12px;
   font-weight: normal;
   line-height: 20px;
+}
+button{
+    border: 1px solid #e2e2e2;
+padding: 7px 20px;
+color: #fff;
+font-size: 14px;
 }
 input,
 button,

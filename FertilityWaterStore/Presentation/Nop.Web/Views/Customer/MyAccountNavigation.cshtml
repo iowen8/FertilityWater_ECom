@@ -15,13 +15,13 @@
                                                                    else
                                                                    {<text>inactive</text>}">@T("Account.CustomerInfo")</a></li>
             }
-            @if (!Model.HideAddresses)
+            @*@if (!Model.HideAddresses)
             {
                 <li class=""><a href="@Url.RouteUrl("CustomerAddresses")" class="@if (Model.SelectedTab == CustomerNavigationEnum.Addresses)
                                                                         {<text>active</text>}
                                                                         else
                                                                         {<text>inactive</text>}">@T("Account.CustomerAddresses")</a></li>
-            }
+            }*@
             @if (!Model.HideOrders)
             { 
                 <li class=""><a href="@Url.RouteUrl("CustomerOrders")" class="@if (Model.SelectedTab == CustomerNavigationEnum.Orders)

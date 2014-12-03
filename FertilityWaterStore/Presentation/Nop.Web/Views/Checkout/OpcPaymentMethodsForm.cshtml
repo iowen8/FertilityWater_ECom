@@ -89,11 +89,9 @@
                             $("#ExpireYear").blur(function () {
                                 var eM = $("#ExpireMonth").val();
                                 var eY = $("#ExpireYear").val();
-                                alert(eM + "/" + eY);
                                 var d = new Date();
                                 var m = d.getMonth();
                                 var y = d.getFullYear();
-                                alert(m + "/" + y);
 
                                 if (eY > y)
                                     return;
@@ -177,11 +175,8 @@
                             });
 
                             $("#CardNumber").blur(function () {
-                                alert("hh");
                                 var v = $("#CardNumber").val();
-                                alert(v);
                                 $("#CardNumberChecker").val(v);
-                                alert($("#CardNumberChecker").val());
 
                                 $("#CardNumberChecker").validateCreditCard(function (result) {
                                  
@@ -209,8 +204,6 @@
                                     }
                                     else if (result.luhn_valid) {
                                         var cT = $("#CreditCardType").val();
-                                        alert(cT);
-                                        alert(result.card_type.name);
                                         if (cT == result.card_type.name)
                                             return;
                                         $("#CardNumber").val("");
@@ -234,9 +227,7 @@
                                             }
                                         });
                                     }
-                                    else {
-                                        alert(result.name);
-                                    }
+                                    
                                 });
                             });
                             

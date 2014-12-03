@@ -29,10 +29,10 @@
 /* transparent bg **/
 #charity_progress.fund_project h3{background-color:transparent !important;}
 /*Skin images **/
-.f-img-1 .img {    background: url("../../images/purple/feature_img_1.png") no-repeat scroll center top transparent;	}
-.f-img-2 .img {    background: url("../../images/purple/feature_img_2.png") no-repeat scroll center top transparent;	}
-.f-img-3 .img {    background: url("../../images/purple/feature_img_3.png") no-repeat scroll center top transparent;	}
-.f-img-4 .img {    background: url("../../images/purple/feature_img_4.png") no-repeat scroll center top transparent;	}
+.f-img-1 .img {    background: url("../../images/water_drop.png") no-repeat scroll center top transparent;	}
+.f-img-2 .img {    background: url("../../images/womanandbaby.png") no-repeat scroll center top transparent;	}
+.f-img-3 .img {    background: url("../../images/purple/feature_img_1.png") no-repeat scroll center top transparent;	}
+.f-img-4 .img {    background: url("../../images/question.png") no-repeat scroll center top transparent;	}
 #news .bx-controls-direction a:hover {    background-image: url("../../images/purple/slider_2_arrow_active.png");	}
 #slider_blog .bx-controls-direction a:hover {    background-image: url("../../images/purple/slider_2_arrow_active.png");	}
 .banner_slider .bx-controls-direction a {    background-image: url("../../images/purple/t_slider_nav.png");		}

@@ -15,7 +15,6 @@
 
     <script type="text/javascript">
         function doDefaultSearch() {
-            alert("here");
             var prefix = "@Request.Url.GetLeftPart(UriPartial.Authority)" + "/Search?Q=";
             var suffix = "&As=false&Cid=0&Isc=false&Mid=0&Pf=&Pt=&Sid=false";
             var term = document.getElementById('defaultSearch').value;

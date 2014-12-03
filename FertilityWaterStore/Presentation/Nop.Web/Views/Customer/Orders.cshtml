@@ -12,58 +12,91 @@
 }
 <div class="page account-page order-list-page">
     <div class="page-body">
-<figure class="span9" id="horizontal_tabs_content">			
-    <div id="myTabContent">
-        <h1>@T("Account.MyAccount") - @T("Account.CustomerOrders")</h1>
+        <!-- Title & BreadCrumbs -->
+        <section class="mtop">
+            <section class="container-fluid container">
+                <section class="row-fluid">
+                    <!-- Page Title -->
 
-        <div class="order-list" style="margin-top:30px;">
-            <table id="ordersTable" class="display" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Order Number</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th></th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Orders.Count > 0)
-                    {
-                        foreach (var order in Model.Orders)
-                        {
-                            <tr>
-                                <td>
-                                    <strong>@order.Id</strong>
-                                </td>
-                                <td>
-                                    @order.OrderStatus
-                                </td>
-                                <td>
-                                    @order.CreatedOn.ToString()
-                                </td>
-                                <td>
-                                    @T("Account.CustomerOrders.OrderTotal"): @order.OrderTotal
-                                </td>
+                    <section id="donation_box">
+                        <section class="container container-fluid span9">
+                            <section class="row-fluid">
+                                <figure class="span9">
+                                    <h2> @T("Account.MyAccount") - @T("Account.CustomerOrders") </h2>
+                                </figure>
+                            </section>
+                        </section>
+                    </section>
 
-                                <td>
-                                    <input type="button" value="@T("Account.CustomerOrders.OrderDetails")" class="button-2 order-details-button" onclick="setLocation('@Url.RouteUrl("OrderDetails", new { orderId = order.Id })')" />
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <!-- end of Page Title -->
+                </section>
 
-                                  <script>
-  
-        $('#ordersTable').dataTable();
-   
-</script>
-</figure>
+            </section>
+        </section>
+        <!-- End of Tile & Breadcrumbs -->
+
+        <section class="container-fluid container">
+            <br />
+            <section class="row-fluid">
+                <section class="span9 mbtm2 outer_lyr">
+                    <section class="inner_lyr">
+                        <figure id="horizontal_tabs_content">
+                            <div id="myTabContent">
+                                <div class="order-list" style="margin-top:30px;">
+                                    <table id="ordersTable" class="display" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Order Number</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th>Total</th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Orders.Count > 0)
+                                            {
+                                                foreach (var order in Model.Orders)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <strong>@order.Id</strong>
+                                                        </td>
+                                                        <td>
+                                                            @order.OrderStatus
+                                                        </td>
+                                                        <td>
+                                                            @order.CreatedOn.ToString()
+                                                        </td>
+                                                        <td>
+                                                            @T("Account.CustomerOrders.OrderTotal"): @order.OrderTotal
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="button" value="@T("Account.CustomerOrders.OrderDetails")" class="button-2 order-details-button" onclick="setLocation('@Url.RouteUrl("OrderDetails", new { orderId = order.Id })')" />
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <script>
+
+                                $('#ordersTable').dataTable();
+
+                            </script>
+                        </figure>
+
+                    </section>
+                </section>
+            </section>
+
+        </section>
 
     </div>
 </div>

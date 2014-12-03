@@ -112,13 +112,19 @@
 					
 					
 					<ul class="stock_status">
-							
-							<li> <i class="icon-ok"></i> In Stock </li>
-							<li> Delivery 3 - 4 Working Days </li>
+							@if (!String.IsNullOrEmpty(Model.StockAvailability))
+                            { 
+							<li > <i class="icon-ok"></i>@Model.StockAvailability</li>
+							<li > Delivery 5 - 7 Working Days </li>
+                            }
+                            else
+                            {
+                                <li>OUT Of STOCK</li>
+                            }
 					
 					</ul>
 					
-				<figure id="n_social" class="product_detail_social"> 
+				@*<figure id="n_social" class="product_detail_social"> 
 				
 					<a href="#" class="fb"> <i class="icon-facebook"></i> </a> 
 					<a href="#" class="twitter"> <i class="icon-twitter"></i> </a> 
@@ -127,7 +133,7 @@
 					<a href="#" class="pintrest"> <i class="icon-pinterest"></i> </a> 
 					<a href="#" class="comments"> 28 Comments </a> 
 					
-				</figure>
+				</figure>*@
 				
 			</figure>
  

@@ -37,29 +37,6 @@
 				<section class="container container-fluid">
 					<section class="row-fluid">
 					<div class="span8 first"> <h2>@T("Search")</h2> </div>
-						<div class="span4 title_right">
- 
-				<div class="dropdown" id="cart_dropdown">
- 				<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="dd_title" href="#">
-				<i class="icon-user"></i>
- 				Help
-				</a>
-				
-				<figure class="dropdown-menu hidden_layer" aria-labelledby="dd_title" role="menu" id="title_dropdown">
-						<div class="inner">
-							<div class="span2 first">
-								<span class="icon_alert"> i </span>
-							</div>
-							<div class="span10"> 
-							<h3> Still looking for answers?  </h3>
-							<p> One of our professionals can probably help you out. You can contact them with the button below.</p>
-                                <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/Contact" class="btns pull-left"> Contact Us </a>
-							</div>
-						</div>
-				</figure>
-		</div>
-
-			</div>
 		
 		</section>
 				</section>
@@ -93,7 +70,9 @@
                     @Html.Widget("productsearch_page_basic")
                     <div class="inputs reversed">
                         @Html.CheckBoxFor(model => model.As)
-                        @Html.LabelFor(model => model.As)
+                        @Html.LabelFor(model => model.As, new {style="display:inline"})
+                        <br />
+
                     </div>
                 </div>
                 <div class="advanced-search" id="advanced-search-block">
@@ -105,7 +84,9 @@
                         </div>
                         <div class="inputs reversed">
                             @Html.CheckBoxFor(model => model.Isc)
-                            @Html.LabelFor(model => model.Isc)
+                            @Html.LabelFor(model => model.Isc, new {style="display:inline"})
+                            <br />
+
                         </div>
                     }
                     @if (Model.AvailableManufacturers.Count > 0)
@@ -126,7 +107,8 @@
                     </div>
                     <div class="inputs reversed">
                         @Html.CheckBoxFor(model => model.Sid)
-                        @Html.LabelFor(model => model.Sid)
+                        @Html.LabelFor(model => model.Sid, new {style="display:inline"})
+                        <br />
                     </div>
                     @Html.Widget("productsearch_page_advanced")
                 </div>
@@ -265,7 +247,7 @@ foreach(var product in Model.Products)
 	<figure class="span4 first" id="product" style="padding-right:10px;"> 
 <div class="product_img">
 								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
-								<span class="sale_icon"></span>
+								@*<span class="sale_icon"></span>*@
 						</div>
 						
 						<div class="first product_description">
@@ -287,7 +269,7 @@ if(cnt > 0 && cnt < 2)
 	<figure class="span4 " id="product" style="padding-right:10px;"> 
 <div class="product_img">
 								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
-								<span class="sale_icon"></span>
+								@*<span class="sale_icon"></span>*@
 						</div>
 						
 						<div class="first product_description">
@@ -308,7 +290,7 @@ continue;
 	<figure class="span4 " id="product" > 
 <div class="product_img">
 								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
-								<span class="sale_icon"></span>
+								@*<span class="sale_icon"></span>*@
 						</div>
 						
 						<div class="first product_description">

@@ -54,9 +54,11 @@ var nme = item.value;
 			<div class="cart_table_holder">
 @*we add enctype = "multipart/form-data" because "File upload" attribute control type requires it*@
         @using (Html.BeginRouteForm("ShoppingCart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {                    <input type="submit" name="updatecart" id="updatecart"  value="@T("ShoppingCart.UpdateCart")" class="button-2 update-cart-button" />
-<button type="submit" id="checkout" name="checkout" value="checkout" class="pull-right checkout_btn">Proceed to Checkout</button>
-
+        {
+            <div>
+                <input type="submit" name="updatecart" id="updatecart" value="@T("ShoppingCart.UpdateCart")" class="button-2 update-cart-button" />
+                <button type="submit" id="checkout" name="checkout" value="checkout" class="pull-right continue_shopping">Proceed to Checkout</button>            <br />
+            </div><br />
 			<table width="100%" cellpadding="10" border="0">
  				   <thead>
 				  <tr>
@@ -89,8 +91,7 @@ var nme = item.value;
  			
 			</table>
 				<div class="cart_btn_wrapper">
-				<a href="#" class="pull-left continue_shopping"> Continue Shopping </a>
-                            <button type="submit" id="checkout" name="checkout" value="checkout" class="pull-right checkout_btn">Proceed to Checkout</button>
+                            <button type="submit" id="checkout" name="checkout" value="checkout" class="pull-right continue_shopping">Proceed to Checkout</button>
 				</div>
   }
 			</div>

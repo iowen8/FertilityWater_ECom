@@ -25,12 +25,10 @@ var AjaxCart = {
 
     //add a product to the cart/wishlist from the catalog pages
     addproducttocart_catalog: function (urladd) {
-        alert(urladd);
         if (this.loadWaiting != false) {
             return;
         }
         this.setLoadWaiting(true);
-        alert("sending");
         $.ajax({
             cache: false,
             url: urladd,

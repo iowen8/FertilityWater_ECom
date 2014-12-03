@@ -1484,6 +1484,7 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.view.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js" />
+    <Content Include="Scripts\spin.js" />
     <Content Include="Scripts\tag-it.js" />
     <Content Include="Scripts\tag-it.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -2168,6 +2169,8 @@
     <Content Include="Themes\FertilityTheme\Content\images\purple\slider_2_arrow_active.png" />
     <Content Include="Themes\FertilityTheme\Content\images\purple\twitter_bg.png" />
     <Content Include="Themes\FertilityTheme\Content\images\purple\t_slider_nav.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\question.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\question_hover.png" />
     <Content Include="Themes\FertilityTheme\Content\images\red\feature_img_1.png" />
     <Content Include="Themes\FertilityTheme\Content\images\red\feature_img_2.png" />
     <Content Include="Themes\FertilityTheme\Content\images\red\feature_img_3.png" />
@@ -2232,6 +2235,10 @@
     <Content Include="Themes\FertilityTheme\Content\images\user_comment_img.jpg" />
     <Content Include="Themes\FertilityTheme\Content\images\video_slider_arrow.png" />
     <Content Include="Themes\FertilityTheme\Content\images\video_slider_img.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\water_drop.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\water_drop_hover.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\womanandbaby.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\womanandbaby_hover.png" />
     <Content Include="Themes\FertilityTheme\Content\responsive.css" />
     <Content Include="Themes\FertilityTheme\Content\styles.css" />
     <Content Include="Themes\FertilityTheme\Content\styles.rtl.css" />

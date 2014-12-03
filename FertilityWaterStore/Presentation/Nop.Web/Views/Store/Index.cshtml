@@ -47,7 +47,7 @@
  
 					
 					<figure class="span12 first" id="category_title">
-							<div class="span10 first"> <h3> Featured Products </h3>	</div>						
+							<div class="span10 first"> <h3> Our Products </h3>	</div>						
 					</figure>
 					
 					<Section class="product_image_holder">
@@ -70,10 +70,10 @@ foreach(var product in ViewBag.products)
     if (cnt == 0)
 {
 	<figure class="span4 first" id="product" style="padding-right:10px;"> 
-<div class="product_img">
-								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
-								<span class="sale_icon"></span>
-						</div>
+        <div class="product_img" onclick="location.href = '@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName'">
+            <img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;" />
+            @*<span class="sale_icon"></span>*@
+        </div>
 						
 						<div class="first product_description">
 							<h3> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName"> @product.Name</a> </h3>
@@ -91,10 +91,10 @@ continue;
 if(cnt > 0 && cnt < 2)
 {
 	<figure class="span4 " id="product" style="padding-right:10px;"> 
-<div class="product_img">
-								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
-								<span class="sale_icon"></span>
-						</div>
+        <div class="product_img" onclick="location.href = '@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName'">
+            <img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;" />
+            @*<span class="sale_icon"></span>*@
+        </div>
 						
 						<div class="first product_description">
 							<h3> <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName"> @product.Name</a> </h3>
@@ -112,9 +112,9 @@ continue;
 				if(cnt == 2)
 {
 	<figure class="span4 " id="product" > 
-<div class="product_img">
+<div class="product_img" onclick="location.href = '@Request.Url.GetLeftPart(UriPartial.Authority)/@product.SeName'">
 								<img src="@product.DefaultPictureModel.ImageUrl" alt="Product Image" style="width:201px; height:151px;"/>
-								<span class="sale_icon"></span>
+								@*<span class="sale_icon"></span>*@
 						</div>
 						
 						<div class="first product_description">
@@ -165,7 +165,7 @@ cnt = 0;
 							</figure>
 							
 						
-							<figure class="widget latest_tweets">
+							@*<figure class="widget latest_tweets">
 							
 								<h3> <i class="icon-twitter"></i> Social Updates </h3>
 								
@@ -188,7 +188,7 @@ cnt = 0;
 									</li>
 								</ul>
 							
-							</figure>
+							</figure>*@
 						
 							
 			

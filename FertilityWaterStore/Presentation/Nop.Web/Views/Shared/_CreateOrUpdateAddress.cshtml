@@ -70,8 +70,8 @@
         for (s in serialized) {
             sdata[serialized[s]['name']] = serialized[s]['value'].trim();
         }
+        StartSpinner();
         var collection = JSON.stringify(sdata);
-        alert("submitting");
         $.ajax({
             type: "POST",
             url: "@Url.Action("OpcShippingAddressForm", "Checkout")",
@@ -79,13 +79,13 @@
             dataType: "text",
             success: function (data) {
                 var da = JSON.parse(data);
-                alert(data); // show response from the php script.
                 if (da.success == "true")
                 {
                     $("#targetShipping").html(da.html);
+                    StopSpinner();
                 }
                 else {
-                    alert("failure");
+                    StopSpinner();
                     $("#dMessage").html("Invalid Address!. Please check your input and try again.");
                     $("#dialog-message").dialog({
                         autoOpen: true,
@@ -108,6 +108,7 @@
                 }
             },
             error: function (data) {
+                StopSpinner();
                 $("#dialog-message").dialog({
                     autoOpen: true,
                     show: {
@@ -185,18 +186,32 @@
         @Html.ValidationMessageFor(model => model.Email)                                </div>
                               </div>
                             </li>
-                            <li>   
-                              <div class="control-group">
-            @Html.LabelFor(model => model.Address1, new {@class="control-label" }, ":")
+                        <li>
+                            <div class="control-group">
+                                @Html.LabelFor(model => model.Address1, new { @class = "control-label" }, ":")
 
                                 <div class="controls">
-                @Html.EditorFor(model => model.Address1, new{id="inputAddressS"})
+                                    @Html.EditorFor(model => model.Address1, new { id = "inputAddressS" })
 
-                @Html.RequiredHint()
-            
-            @Html.ValidationMessageFor(model => model.Address1)                                </div>
-                              </div>
-                            </li>
+                                    @Html.RequiredHint()
+
+                                    @Html.ValidationMessageFor(model => model.Address1)
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="control-group">
+                                @Html.LabelFor(model => model.Address2, new { @class = "control-label" }, ":")
+
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.Address2, new { id = "inputAddressS2" })
+
+                                    @Html.RequiredHint()
+
+                                    @Html.ValidationMessageFor(model => model.Address2)
+                                </div>
+                            </div>
+                        </li>
                             <li> 
                                 <div class="control-group">
                                     @Html.LabelFor(model => model.CountryId, new { @class = "control-label" }, ":")
@@ -276,7 +291,7 @@
                         	<li>
                             	<div class="control-group">
                                 <div class="controls">
-                                    <button class="more-btn" id="cBtn" onclick="doFormSubmit();" >Get Rates</button>
+                                    <button class="continue-shopping" id="cBtn" onclick="doFormSubmit();" style="background:#ab29e1; color:#fff;">Get Rates</button>
                                 </div>
                               </div>
                             </li>
@@ -302,8 +317,36 @@
         }
       
         var collectionB = JSON.stringify(sdata);
-        alert(collectionB);
+        var eM = $("#ExpireMonth").val();
+        var eY = $("#ExpireYear").val();
+        var cde = $("#CardCode").val();
+        var cT = $("#CreditCardType").val();
+        var cn = $("#CardNumber").val();
+        var ch = $("#CardholderName").val();
 
+        if (eM.trim() == "" || eY.trim() == "" || cde.trim() == "" || cT.trim() == "" || cn.trim() == "" || ch.trim() == "")
+        {
+            $("#dMessage").html("All card information is required.");
+            $("#dialog-message").dialog({
+                autoOpen: true,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                },
+                title: "Payment Error",
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            return false;
+        }
         sdata = {};
         s = '';
         serialized = $("#bMethodForm").serializeArray();
@@ -312,8 +355,7 @@
         }
 
         var collectionC = JSON.stringify(sdata);
-        alert(collectionC);
-        alert("submitting");
+        StartSpinner();
   
         $.ajax({
             type: "POST",
@@ -322,23 +364,22 @@
             dataType: "text",
         success: function (data) {
             var d = JSON.parse(data);
-            alert(d.success);
             if (d.success == "true") {
-                alert(d.html);
                 $("#fCO").html(d.html);
-                alert("setting max");
                 presentationCycle.setMaxEnabled(3);
-                alert("switching");
+                StopSpinner();
                 presentationCycle.gotoSlide(3);
             }
-            else
+            else {
+                StopSpinner();
                 return false;
+            }
 
         },
         error: function (data)
         {
-            alert(data);
-            alert("error");
+            StopSpinner();
+            alert("An error occured.");
             return false;
         }
     });
@@ -386,6 +427,19 @@
                                         @Html.RequiredHint()
 
                                         @Html.ValidationMessageFor(model => model.Address1)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="control-group">
+                                    @Html.LabelFor(model => model.Address2, new { @class = "control-label" }, ":")
+
+                                    <div class="controls">
+                                        @Html.EditorFor(model => model.Address2, new { id = "inputAddress2" })
+
+                                        @Html.RequiredHint()
+
+                                        @Html.ValidationMessageFor(model => model.Address2)
                                     </div>
                                 </div>
                             </li>
@@ -469,7 +523,7 @@
                             <li>
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button class="more-btn" id="cBtnBill" onclick="doBillingFormSubmit();">Continue</button>
+                                        <button class="continue-shopping" id="cBtnBill" onclick="doBillingFormSubmit();" style="background:#ab29e1; color:#fff;">Review Order</button>
                                     </div>
                                 </div>
                             </li>

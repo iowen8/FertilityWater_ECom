@@ -42,13 +42,39 @@
     <div class="page registration-page">
    
         <div class="page-body">
+            <!-- Title & BreadCrumbs -->
+            <section class="mtop">
+                <section class="container-fluid container">
+                    <section class="row-fluid">
+                        <!-- Page Title -->
+
+
+                        <section id="donation_box">
+                            <section class="container container-fluid span12">
+                                <section class="row-fluid">
+                                    <figure class="span12">
+                                        <h2> @T("Account.Register")</h2>
+                                    </figure>
+                                </section>
+                            </section>
+                        </section>
+
+                        <!-- end of Page Title -->
+                    </section>
+
+                </section>
+            </section>
+            <!-- End of Tile & Breadcrumbs -->
+            <br />
+
+
+
             <section id="content" class="mbtm about">
                 <section class="container-fluid container">
 
                     <section class="row-fluid">
                         <section class="span12 first mbtm2 outer_lyr">
                             <section class="inner_lyr">
-                                <h1>@T("Account.Register")</h1>
 
                                 <div class="message-error">
                                     @Html.ValidationSummary(true)

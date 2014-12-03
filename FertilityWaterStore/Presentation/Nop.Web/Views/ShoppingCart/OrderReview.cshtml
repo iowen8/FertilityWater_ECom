@@ -7,19 +7,34 @@
 }
 <script>
     function osubmitOrder() {
-        alert("submitting order");
         //disable page tp prevent
+        StartSpinner();
+        //terms of service
+        var termOfServiceOk = true;
+        if ($('#termsofservice').length > 0) {
+            //terms of service element exists
+            if (!$('#termsofservice').is(':checked')) {
+                StopSpinner()
+                $("#terms-of-service-warning-box").dialog();
+                termOfServiceOk = false;
+                return false;
+            } else {
+                termOfServiceOk = true;
+            }
+        }
+      
         $.ajax({
             cache: false,
             type: "POST",
             url: "@Url.Action("PlaceOrder", "ShoppingCart")",
             data: { "place": "true" },
             success: function (data) {
-                alert("success");
-                alert(data.success);
+               
                 if (data.success == "true") {
+                    StopSpinner();
                     window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/orderdetails/" + data.orderNumber;
                 } else {
+                    StopSpinner();
                     $("#dMessage").html("This payment was declined. Please check your input and try again.");
                     $("#dialog-message").dialog({
                         autoOpen: true,
@@ -39,14 +54,12 @@
                             }
                         }
                     });
-                    alert("setting max");
                     presentationCycle.setMaxEnabled(2);
-                    alert("switching");
                     presentationCycle.gotoSlide(2);
                 }
             },
             error: function (data) {
-                alert('Failed.');
+                StopSpinner();
                 $("#dMessage").html("This payment was declined. Please check your input and try again.");
                 $("#dialog-message").dialog({
                     autoOpen: true,
@@ -66,9 +79,7 @@
                         }
                     }
                 });
-                alert("setting max");
                 presentationCycle.setMaxEnabled(2);
-                alert("switching");
                 presentationCycle.gotoSlide(2);
             }
         });
@@ -104,8 +115,19 @@
 
                     @Html.Action("OrderReviewTotals", "ShoppingCart", new { isEditable = Model.IsEditable })
                     <tr>
-                        <td align="left" colspan="3">Forgot an items? Edit your cart</td>
-                        <td><input type="button" class="more-btn" onclick="osubmitOrder();" value="Place Order"/> </td>
+                        <td align="left" colspan="3">@if (Model.TermsOfServiceOnOrderConfirmPage)
+                        {
+                            <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display:none;">
+                                <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+                            </div>
+                            <div class="terms-of-service">
+                                <input id="termsofservice" type="checkbox" name="termsofservice" />
+                                @T("Checkout.TermsOfService.IAccept")
+                                <span class="read" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "conditionsofuse" })', 450, 500, true)">@T("Checkout.TermsOfService.Read")</span>
+                            </div>
+                        }</td>
+                        <td colspan="3">
+                        <button class="continue-shopping" style="background:#ab29e1; color:#fff; width:150px;" onclick="osubmitOrder();">Place Order</button> </td>
                     </tr>
                 </tbody>
             </table>

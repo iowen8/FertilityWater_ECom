@@ -178,6 +178,7 @@ var presentationCycle = {
         presentationCycle.disableAnimation = true;
         if (itemNr > presentationCycle.maxEnabled)
             return;
+        presentationCycle.maxEnabled = itemNr;
         $('#' + presentationCycle.containerId).cycle((itemNr - 1));
         $('#' + presentationCycle.containerId).cycle('pause');
 			$('#next1').click(function() {
