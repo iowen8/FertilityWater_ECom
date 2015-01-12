@@ -7,3 +7,13 @@ C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\
 C:\Users\Administrator\Desktop\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\Nop.Plugin.DiscountRules.HadSpentAmount.pdb
 C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.dll
 C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\Views\DiscountRulesHadSpentAmount\Configure.cshtml
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\Description.txt
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\web.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\logo.jpg
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\Nop.Plugin.DiscountRules.HadSpentAmount.dll.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\Nop.Plugin.DiscountRules.HadSpentAmount.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.HadSpentAmount\Nop.Plugin.DiscountRules.HadSpentAmount.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.HadSpentAmount\obj\Debug\Nop.Plugin.DiscountRules.HadSpentAmount.pdb

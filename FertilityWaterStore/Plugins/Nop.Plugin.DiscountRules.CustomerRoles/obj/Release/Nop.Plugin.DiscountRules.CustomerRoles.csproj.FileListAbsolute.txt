@@ -1,0 +1,10 @@
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Views\DiscountRulesCustomerRoles\Configure.cshtml
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Description.txt
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\web.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\logo.jpg
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Nop.Plugin.DiscountRules.CustomerRoles.dll.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Nop.Plugin.DiscountRules.CustomerRoles.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\DiscountRules.CustomerRoles\Nop.Plugin.DiscountRules.CustomerRoles.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Release\Nop.Plugin.DiscountRules.CustomerRoles.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Release\Nop.Plugin.DiscountRules.CustomerRoles.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.DiscountRules.CustomerRoles\obj\Release\Nop.Plugin.DiscountRules.CustomerRoles.csprojResolveAssemblyReference.cache

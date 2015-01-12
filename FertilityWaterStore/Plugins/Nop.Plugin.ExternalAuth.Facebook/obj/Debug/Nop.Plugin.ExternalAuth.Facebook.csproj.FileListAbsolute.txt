@@ -12,3 +12,17 @@ C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAu
 C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.dll
 C:\Users\Administrator\Desktop\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Description.txt
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Views\ExternalAuthFacebook\Configure.cshtml
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Views\ExternalAuthFacebook\PublicInfo.cshtml
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\web.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Content\facebookstyles.css
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Content\Images\facebook-signing.png
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\logo.jpg
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Nop.Plugin.ExternalAuth.Facebook.dll.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Nop.Plugin.ExternalAuth.Facebook.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\ExternalAuth.Facebook\Nop.Plugin.ExternalAuth.Facebook.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.csproj.App.config
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.ExternalAuth.Facebook\obj\Debug\Nop.Plugin.ExternalAuth.Facebook.pdb

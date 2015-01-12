@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\bin\Release\Nop.Tests.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\bin\Release\Nop.Tests.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\bin\Release\nunit.framework.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\bin\Release\Rhino.Mocks.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\bin\Release\nunit.framework.xml
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\bin\Release\Rhino.Mocks.xml
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\obj\Release\Nop.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\obj\Release\Nop.Tests.dll
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Tests\Nop.Tests\obj\Release\Nop.Tests.pdb

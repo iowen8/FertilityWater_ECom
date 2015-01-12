@@ -41,6 +41,5 @@ C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\bin\Debug\System.Web.WebPages.xml
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\obj\Debug\Nop.Core.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\obj\Debug\Nop.Core.dll
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\obj\Debug\Nop.Core.pdb
