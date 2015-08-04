@@ -20,3 +20,4 @@ C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\bin\Release\System.Web.WebPages.Razor.xml
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\obj\Release\Nop.Core.dll
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\obj\Release\Nop.Core.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Libraries\Nop.Core\obj\Release\Nop.Core.csprojResolveAssemblyReference.cache

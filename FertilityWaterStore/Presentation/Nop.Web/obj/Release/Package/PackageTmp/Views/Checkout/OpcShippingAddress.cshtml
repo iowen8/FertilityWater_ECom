@@ -1,0 +1,17 @@
+﻿@model CheckoutShippingAddressModel
+@using Nop.Web.Models.Checkout;
+
+        @Html.Widget("op_checkout_shipping_address_top")
+       
+        @Html.Widget("op_checkout_shipping_address_middle")
+      
+                    @{
+                        var dataDictAddress = new ViewDataDictionary();
+                        //Merge ModelState (required for validation)
+                        dataDictAddress.ModelState.Merge(ViewData.ModelState);
+                        //dataDictAddress.TemplateInfo.HtmlFieldPrefix = "ShippingNewAddress";
+                        @Html.Partial("_CreateOrUpdateAddress", Model.NewAddress, dataDictAddress)
+                    }
+                
+        @Html.Widget("op_checkout_shipping_address_bottom")
+    

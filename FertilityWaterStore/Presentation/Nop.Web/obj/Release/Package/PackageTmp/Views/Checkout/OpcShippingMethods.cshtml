@@ -1,0 +1,105 @@
+﻿@model CheckoutShippingMethodModel
+@using Nop.Web.Models.Checkout;
+
+    @Html.Widget("op_checkout_shipping_method_top")
+<script>
+    var selectedMethod = 0;
+    function setShippingOption(opt, sid)
+    {
+        $("#shippingoption").val(opt);
+        var oldId = "#shippingoptiondiv_" + selectedMethod;
+        var newId = "#shippingoptiondiv_" + sid;
+        $(oldId).css("background-color", "#e2e2e2");
+        $(newId).css("background-color", "#739AC5");
+        selectedMethod = sid;
+    }
+    function testThis()
+    {
+    StartSpinner();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("saveShippingInfo", "Checkout")",
+            data: { shippingoption: $("#shippingoption").val() }, // serializes the form's elements.
+        dataType: "text",
+        success: function (data) {
+            var d = JSON.parse(data);
+            if(d.success == "true")
+            {
+                presentationCycle.setMaxEnabled(2);
+    StopSpinner();
+                presentationCycle.gotoSlide(2);
+
+            }
+            else
+    StopSpinner();
+           // $("#targetShipping").html(data);
+        }
+    });
+  //  alert("here");
+   // presentationCycle.gotoSlide(2);
+    }
+
+</script>
+        @if (Model.Warnings.Count == 0)
+        {
+            <input type="hidden" name="shippingoption" value="" id="shippingoption" />
+
+    <ul class="accordion faq_accordion" id="accordion2">
+        @for (int i = 0; i < Model.ShippingMethods.Count; i++)
+        {
+            var shippingMethod = Model.ShippingMethods[i];
+            var _name = shippingMethod.Name.ToString() + "___" + shippingMethod.ShippingRateComputationMethodSystemName.ToString();
+            <li class="accordion-group">
+
+
+                <div class="method-name accordion-heading" onclick="setShippingOption('@_name', @(i))" >
+                    @if (shippingMethod.Selected)
+                    {
+                        <a class="accordion-toggle active" data-toggle="collapse"  data-parent="#accordion2" href="#collapse@(i)">
+                            <span class="toggle_faq" id="shippingoptiondiv_@(i)"  style="background-color:#739AC5; width: 2%;margin-right: 1%;display:inline; float:left;"><i class="icon-chevron-right"></i> </span>
+                            <h3 style="width:95.5%; display:inline; float:left; margin-top:12px">	<strong> @T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</strong>	<h3>
+                        </a>
+                        <script>
+                            setShippingOption('@_name', @(i));
+                        </script>
+                    }
+
+                    @if (!shippingMethod.Selected)
+                    {
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse@(i)" >
+
+                            <span class=" toggle_faq" id="shippingoptiondiv_@(i)" style=" background-color:#e2e2e2;width: 2%;margin-right 1%; display:inline; float:left;">
+        <i class="icon-chevron-right"></i> </span>
+        <h3 style="width:95.5%; display:inline; float:left; margin-top:12px">	<strong> @T("Checkout.SelectShippingMethod.MethodAndFee", shippingMethod.Name, shippingMethod.Fee)</strong>	<h3>
+    </a>
+                    }
+
+                </div>
+                @if (!String.IsNullOrEmpty(shippingMethod.Description))
+                {
+                    <div id="collapse@(i)" class="accordion-body collapse" style="height: 0px;">
+                        <div class="accordion-inner">
+                                @Html.Raw(shippingMethod.Description)
+                        </div>
+                    </div>
+                }
+
+            </li>
+        }
+    </ul>
+    <button class="continue-shopping"  id="shippingNext" onclick="testThis()" style="background:#ab29e1; color:#fff;" >Next </button>
+        }
+        @*else
+        {
+                                    <div class="message-error">
+                                        <ul>
+                                            @foreach (var warning in Model.Warnings)
+                    {
+                                                <li>@warning</li>
+                    }
+                                        </ul>
+                                    </div>
+        }*@
+                         
+                            @Html.Widget("op_checkout_shipping_method_bottom")
+                   

@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Banner Slider
+SystemName: Widgets.BannerSlider
+Version: 1.05
+SupportedVersions: 3.40
+Author: nopCommerce team
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.BannerSlider.dll

@@ -1837,7 +1837,7 @@ namespace Nop.Web.Controllers
         }
 
 
-        [NopHttpsRequirement(SslRequirement.Yes)]
+        //[NopHttpsRequirement(SslRequirement.Yes)]
         public ActionResult Cart()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.EnableShoppingCart))

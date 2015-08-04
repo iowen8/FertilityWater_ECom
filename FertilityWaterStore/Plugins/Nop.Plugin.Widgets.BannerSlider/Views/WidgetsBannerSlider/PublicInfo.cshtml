@@ -15,16 +15,13 @@
 
 <li> 
 						<img src="@pictureUrl" alt="Banner Slider" />
-							<div class="slider_content"> 
-								<p class="b_dark"> @text</p>
-								<span class="clear"></span>
-								<p class="b_green"> @text</p>
+							<div class="slider_content">
 							</div> 
 					</li>        
     }
 }
 <!-- Start of Header Banner -->
-	<section class="banner_slider mbtm">
+	<section class="banner_slider mbtm" style="">
 		 <ul id="banner_slider">
         @RenderSliderLine(Model.Picture1Url, Model.Text1, Model.Link1)
         @RenderSliderLine(Model.Picture2Url, Model.Text2, Model.Link2)

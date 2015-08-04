@@ -1,0 +1,44 @@
+.event_more a,	.dropdown-menu > li > a:hover,	.dropdown-menu > li > a:focus,	.dropdown-submenu:hover > a,	.dropdown-submenu:focus > a,	.feature:hover .ftr_img,	.feature.active .ftr_img,	#donation_box button,	#charity_progress h3,	#charity_progress .progress-striped .bar,	#news .img_title,	.icon_toggle,	#slider_blog .icon_date i,	#slider_shop .price_cart,	#footer #contact_form input[type="submit"],	#banner_rounded,	#vertical_tabs ul li.active a,	#vertical_tabs ul li:hover a,	#horizontal_tabs ul li.active a,	#horizontal_tabs ul li:hover a,	.donate_btn,	.abt_btn,	#event_grid .hasCountdown, #tags li a.active, #tags li a:hover , #slider_products .bottom_sec , #listing_dropdown ul li a , #map_abs span , .btns , .tier_button , #product .btn, #cart_down_content.dropdown-menu li, .checkout_btn , .more-btn , .heading-bar-table th , .blog_item .read_more , #comments_form input[type="submit"], #portfolio-item-filter a:hover, .faq_accordion .toggle_faq, .p404 h3 i, .title_right .btns, #event_calander .fc-button-next
+{	background-color:#98b827 !important;	background-image:none;	}
+
+/** Transparent Background **/
+#banner_slider li div .b_green, #map_abs
+{    background: none repeat scroll 0 0 rgba(152, 184, 39, 0.8)}
+
+/** Skin Color **/
+.feature:hover .ftr_txt strong,	.feature.active .ftr_txt strong,	#charity_progress h2,	#charity_progress .info span,	#accordion_news .accordion-inner a, #footer .widget a,	.charity_title, #latest_tweets span, .contact_info i , .contact_info i, .current_collection, #product .price , #product_info h3 , .cart_total, #sidebar a, .post_meta ul i, .pagination a, #blog_post_detail .post_meta_detail ul li i, .breadcrumb a, #listing_widget li a:hover, #listing_widget li:hover a, .shortcodes a, .ns_desc a, .post_excerpt a
+{	color:#98b827 !important;	}
+
+/** Dark border color **/
+
+/** Skin Border Color **/
+#donation_box h2,	.h-line,	.icon_toggle,	.view_new:hover,	#horizontal_tabs ul li.active a,	#horizontal_tabs ul li:hover a,	#page_title h2, .gallery-page .view_new figure:hover
+{	border-color:#98b827 !important;	}
+
+#news .img_title p,	#accordion_news .title,	.icon_toggle i,	.event_more i,	#vertical_tabs ul li.active a,	#vertical_tabs ul li:hover a,	#horizontal_tabs ul li.active a,	#horizontal_tabs ul li:hover a,	.donate_btn,	.abt_btn, #tags li a.active, #tags li a:hover, #slider_products .bottom_sec a , #listing_dropdown ul li a , .tier_button , #product .btn , #cart_down_content.dropdown-menu li i , .cart_btn_wrapper a, .cart_btn_wrapper a, .more-btn, .heading-bar-table th, .blog_item .read_more , #comments_form input[type="submit"], #portfolio-item-filter a:hover
+{	color:#fff !important;	}
+
+#nav a,	.footer_nav a,	.footer_3 a,	.switcher-box a
+{	color:#fff !important;	}
+/** dark border **/
+#event_grid .countdown_section, .donate_btn, .abt_btn, .team_member_description .mem_desig, .tier_button, .checkout_btn, .btns
+{ border-color : #6f892b !important; }
+/** dark border **/
+/* transparent bg **/
+#charity_progress.fund_project h3{background-color:transparent !important;}
+/*Skin images **/
+.f-img-1 .img {    background: url("../../images/green/feature_img_1.png") no-repeat scroll center top transparent;	}
+.f-img-2 .img {    background: url("../../images/green/feature_img_2.png") no-repeat scroll center top transparent;	}
+.f-img-3 .img {    background: url("../../images/green/feature_img_3.png") no-repeat scroll center top transparent;	}
+.f-img-4 .img {    background: url("../../images/green/feature_img_4.png") no-repeat scroll center top transparent;	}
+#news .bx-controls-direction a:hover {    background-image: url("../../images/green/slider_2_arrow_active.png");	}
+#slider_blog .bx-controls-direction a:hover {    background-image: url("../../images/green/slider_2_arrow_active.png");	}
+.banner_slider .bx-controls-direction a {    background-image: url("../../images/green/t_slider_nav.png");		}
+#tweets.latest_tweets {    background-image: url("../../images/green/twitter_bg.png") }
+.sale_icon{background-image: url("../../images/green/sale_icon.png") }
+.pc_container {    background-image: url('../../images/green//pc_bg.png');   }
+.pc_bar_container_underflow .left,
+.pc_bar_container_underflow .center,
+.pc_bar_container_underflow .right{background-image: url('../../images/green/pc_item_center.png') !important;  }
+.pc_bar_container_underflow .bar {background-image: url('../../images/green/pc_bar_full.png') !important;  }
+.gallery-page .view_new a.info {    background: url("../../images/green/magnify.png") ; width:32px;	}

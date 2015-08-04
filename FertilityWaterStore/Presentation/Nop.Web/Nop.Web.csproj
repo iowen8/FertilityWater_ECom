@@ -2027,6 +2027,7 @@
     <Content Include="Themes\FertilityTheme\Content\images\feature_img_3_hover.png" />
     <Content Include="Themes\FertilityTheme\Content\images\feature_img_4.png" />
     <Content Include="Themes\FertilityTheme\Content\images\feature_img_4_hover.png" />
+    <Content Include="Themes\FertilityTheme\Content\images\Fertility_Water_Logo.png" />
     <Content Include="Themes\FertilityTheme\Content\images\forum-footer-bg.gif" />
     <Content Include="Themes\FertilityTheme\Content\images\forum-header-bg.gif" />
     <Content Include="Themes\FertilityTheme\Content\images\forward_disabled.png" />

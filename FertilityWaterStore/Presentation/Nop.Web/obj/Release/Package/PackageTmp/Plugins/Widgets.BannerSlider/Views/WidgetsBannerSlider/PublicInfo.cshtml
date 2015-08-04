@@ -1,0 +1,44 @@
+﻿@model Nop.Plugin.Widgets.BannerSlider.Models.PublicInfoModel
+@{
+    Layout = "";
+        Html.AppendCssFileParts("~/Themes/FertilityTheme/Content/css/bxslider.css");
+
+       Html.AppendScriptParts("~/Scripts/js/bxslider.js");
+}
+@using System
+@using Nop.Web.Framework.UI
+
+@helper RenderSliderLine(string pictureUrl, string text, string link, string dataTransition = "")
+{
+    if (!string.IsNullOrEmpty(pictureUrl))
+    {
+
+<li> 
+						<img src="@pictureUrl" alt="Banner Slider" />
+							<div class="slider_content"> 
+								<p class="b_dark"> @text</p>
+								<span class="clear"></span>
+								<p class="b_green"> @text</p>
+							</div> 
+					</li>        
+    }
+}
+<!-- Start of Header Banner -->
+	<section class="banner_slider mbtm">
+		 <ul id="banner_slider">
+        @RenderSliderLine(Model.Picture1Url, Model.Text1, Model.Link1)
+        @RenderSliderLine(Model.Picture2Url, Model.Text2, Model.Link2)
+        @RenderSliderLine(Model.Picture3Url, Model.Text3, Model.Link3, "slideInLeft")
+        @RenderSliderLine(Model.Picture4Url, Model.Text4, Model.Link4)
+        @RenderSliderLine(Model.Picture5Url, Model.Text5, Model.Link5)
+    </ul>
+</section>
+<script type="text/javascript">
+
+        /* BX slider 1*/
+        var bannerslider = $('#banner_slider');
+        if (bannerslider.length) {
+            bannerslider.bxSlider({ auto: true, minSlides: 1, maxSlides: 1, slideMargin: 18, speed: 500 });
+        }
+    
+</script>

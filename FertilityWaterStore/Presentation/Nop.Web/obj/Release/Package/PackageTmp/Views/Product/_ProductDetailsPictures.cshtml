@@ -1,0 +1,32 @@
+﻿@model ProductDetailsModel
+@using Nop.Core.Domain.Media
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Models.Catalog;
+@{
+
+    int productPerRow = EngineContext.Current.Resolve<MediaSettings>().ProductThumbPerRowOnProductDetailsPage;
+}
+<figure class="span5 first" id="product_image">
+				<div class="pro_img" id="pro_img">
+					<img src="@Model.DefaultPictureModel.FullSizeImageUrl" alt="@Model.Name" style="width:422px;height:356px;"/> 
+				</div>
+@*@if (Model.PictureModels.Count > 1)
+    {
+            @for (int i = 0; i < Model.PictureModels.Count; i++)
+            {
+                var picture = Model.PictureModels[i];
+
+                @if (i == 0)
+                {
+                @Html.Raw("<div class=\"span3 first\"> <img src=\""+@picture.ImageUrl+"\" alt=\"\" /> </div>")
+                }
+@if (i > 0)
+{
+				@Html.Raw("<div class=\"span3\"> <img src=\""+@picture.ImageUrl+"\" alt=\"\" /> </div>")
+
+}
+               
+            }
+       *@
+			</figure>
+	

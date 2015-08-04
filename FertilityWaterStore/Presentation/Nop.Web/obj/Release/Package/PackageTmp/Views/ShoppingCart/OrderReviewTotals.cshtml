@@ -1,0 +1,17 @@
+﻿@model OrderTotalsModel
+@using Nop.Web.Models.ShoppingCart;
+<tr>
+    <td align="right" colspan="3">
+        <p>Subtotal</p>
+        <p>Tax</p>
+        <p>Shipping </p>
+        <p>Grand Total</p>
+    </td>
+    <td>
+        <p class="b_price"> @Model.SubTotal</p>
+        <p class="b_price"> @Model.Tax</p>
+        <p class="b_price"> @Model.Shipping </p>
+        <p class ="b_price"> @Model.OrderTotal</p>
+</td>
+</tr>
+	 

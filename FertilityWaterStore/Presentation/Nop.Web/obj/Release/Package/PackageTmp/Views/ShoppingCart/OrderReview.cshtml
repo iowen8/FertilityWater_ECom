@@ -1,0 +1,136 @@
+﻿@model ShoppingCartModel
+@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.ShoppingCart;
+@{
+    var webHelper = EngineContext.Current.Resolve<IWebHelper>();
+}
+<script>
+    function osubmitOrder() {
+        //disable page tp prevent
+        StartSpinner();
+        //terms of service
+        var termOfServiceOk = true;
+        if ($('#termsofservice').length > 0) {
+            //terms of service element exists
+            if (!$('#termsofservice').is(':checked')) {
+                StopSpinner()
+                $("#terms-of-service-warning-box").dialog();
+                termOfServiceOk = false;
+                return false;
+            } else {
+                termOfServiceOk = true;
+            }
+        }
+      
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@Url.Action("PlaceOrder", "ShoppingCart")",
+            data: { "place": "true" },
+            success: function (data) {
+               
+                if (data.success == "true") {
+                    StopSpinner();
+                    window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/orderdetails/" + data.orderNumber;
+                } else {
+                    StopSpinner();
+                    $("#dMessage").html("This payment was declined. Please check your input and try again.");
+                    $("#dialog-message").dialog({
+                        autoOpen: true,
+                        show: {
+                            effect: "blind",
+                            duration: 1000
+                        },
+                        hide: {
+                            effect: "explode",
+                            duration: 1000
+                        },
+                        title: "Payment Error",
+                        modal: true,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                    presentationCycle.setMaxEnabled(2);
+                    presentationCycle.gotoSlide(2);
+                }
+            },
+            error: function (data) {
+                StopSpinner();
+                $("#dMessage").html("This payment was declined. Please check your input and try again.");
+                $("#dialog-message").dialog({
+                    autoOpen: true,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000
+                    },
+                    title: "Payment Error",
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                presentationCycle.setMaxEnabled(2);
+                presentationCycle.gotoSlide(2);
+            }
+        });
+    }
+</script>
+<div class="order-summary-content">
+    <section class="row-fluid">
+
+        <section class="span3">
+                 @Html.Partial("_OrderReviewData", Model.OrderReviewData)
+
+                 </section>
+        <section class="span9">
+
+            <h3> Order Review  </h3>
+            <table width="100%" cellpadding="14" border="0">
+                <tbody>
+                    <tr class="heading-bar-table">
+                        <th width="47%" align="left">Product Name</th>
+                        <th width="18%">Price</th>
+                        <th width="19%">Quantity</th>
+                        <th width="16%">Subtotal </th>
+                    </tr>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td width="47%" align="left"> @item.ProductName </td>
+                            <td width="18%" class="price"> @item.UnitPrice</td>
+                            <td width="19%">@item.Quantity</td>
+                            <td width="16%" class="price"> @item.SubTotal</td>
+                        </tr>
+                    }
+
+                    @Html.Action("OrderReviewTotals", "ShoppingCart", new { isEditable = Model.IsEditable })
+                    <tr>
+                        <td align="left" colspan="3">@if (Model.TermsOfServiceOnOrderConfirmPage)
+                        {
+                            <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display:none;">
+                                <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+                            </div>
+                            <div class="terms-of-service">
+                                <input id="termsofservice" type="checkbox" name="termsofservice" />
+                                @T("Checkout.TermsOfService.IAccept")
+                                <span class="read" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "conditionsofuse" })', 450, 500, true)">@T("Checkout.TermsOfService.Read")</span>
+                            </div>
+                        }</td>
+                        <td colspan="3">
+                        <button class="continue-shopping" style="background:#ab29e1; color:#fff; width:150px;" onclick="osubmitOrder();">Place Order</button> </td>
+                    </tr>
+                </tbody>
+            </table>
+            </section>
+        </section>
+</div>

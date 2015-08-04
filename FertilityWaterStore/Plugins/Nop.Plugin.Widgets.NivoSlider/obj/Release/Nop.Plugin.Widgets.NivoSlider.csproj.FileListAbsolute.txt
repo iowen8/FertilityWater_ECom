@@ -29,3 +29,4 @@ C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentat
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\Widgets.NivoSlider\Nop.Plugin.Widgets.NivoSlider.pdb
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Release\Nop.Plugin.Widgets.NivoSlider.dll
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Release\Nop.Plugin.Widgets.NivoSlider.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.Widgets.NivoSlider\obj\Release\Nop.Plugin.Widgets.NivoSlider.csprojResolveAssemblyReference.cache

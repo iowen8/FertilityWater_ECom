@@ -1,0 +1,23 @@
+﻿@model OrderTotalsModel
+@using Nop.Web.Models.ShoppingCart;
+
+				@{
+                    var ttl = decimal.Parse(Model.Tax.Replace("$", "").Replace(",", "")) + decimal.Parse(Model.SubTotal.Replace("$", "").Replace(",", ""));
+				}
+				<tr>
+					<td colspan="4" width="85%" class="">  Sales Tax: </td>
+                    
+					<td colspan="2" width="15%" class="b_price"> @Model.Tax</td>
+ 
+ 				</tr>
+		
+                </tbody>
+					<tfoot>
+							<tr>
+								<td colspan="4" width="85%"> &nbsp;</td>
+								<td colspan="2" width="15%" class="total_price"> 
+								<div class="total">SUB TOTAL </div>
+								@string.Format("{0:C}", ttl)
+								</td>
+							</tr>
+					</tfoot>

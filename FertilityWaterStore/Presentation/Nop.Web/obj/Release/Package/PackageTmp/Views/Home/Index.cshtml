@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+}
+<script>
+    function goToStore() {
+        window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/Store";
+    }
+
+    function goToContact() {
+        window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/Contact";
+    }
+
+    function goToRegister() {
+        window.location.href = "@Request.Url.GetLeftPart(UriPartial.Authority)/Customer/Register";
+    }
+</script>
+<div class="page home-page">
+    <div class="page-body">
+        @Html.Widget("my_slider")
+    <!-- Start of Features Boxes -->
+	<section id="ngo_features" class="mbtm">
+		<section class="container-fluid container">
+		<section class="row-fluid">
+			<!-- Start of Features Box 1 -->
+			<figure class="span3 feature" onclick="goToStore();">
+			<div class="ftr_img f-img-1"> 
+				<span class="img"> Shop Now </span>
+			</div>
+			<div class="ftr_txt">
+			<strong> Shop Now </strong>
+			<p> Browse our store and get started with fertility alkaline water today! </p>
+			</div>
+		</figure>
+			<!-- End of Features Boxes 1 -->
+			
+			<!-- Start of Features Box 2 -->
+            <figure class="span3 feature" onclick="goToRegister();">
+                <div class="ftr_img f-img-2">
+                    <span class="img"> Member Benefits  </span>
+                </div>
+                <div class="ftr_txt">
+                    <strong> Member Benefits </strong>
+                    <p> Register to enjoy the benefits of shopping with us. </p>
+                </div>
+            </figure>
+			<!-- End of Features Boxes 2 -->
+			
+			<!-- Start of Features Box 3 --> 
+            <figure class="span3 feature" onclick="goToStore();">
+                <div class="ftr_img f-img-3">
+                    <span class="img"> Home Delivery  </span>
+                </div>
+                <div class="ftr_txt">
+                    <strong> Home Delivery </strong>
+                    <p> Members can have their order delivered diretly to their homes. </p>
+                </div>
+            </figure>
+			<!-- End of Features Boxes 3 -->
+			
+			<!-- Start of Features Box 4 -->		
+            <figure class="span3 feature" onclick="goToContact();">
+                <div class="ftr_img f-img-4">
+                    <span class="img"> Questions </span>
+                </div>
+                <div class="ftr_txt">
+                    <strong> Questions </strong>
+                    <p> Have any questions or concerns? We will be happy to help. </p>
+                </div>
+            </figure>
+ 			<!-- End of Features Boxes 4 -->
+	</section>
+	</section>
+	</section>
+<!-- End of Features Boxes -->
+
+<!-- Start of Donation Box -->
+	<section id="donation_box" class="mbtm">
+	<section class="container container-fluid">
+		<section class="row-fluid">
+		<figure class="span10">
+			<h2> We understand this<strong> is personal </strong> and <strong> we care!</strong> </h2>
+		</figure>
+		@*<figure class="span2">
+			<form action="#">
+				<input type="hidden" value="5.00" name="amout" />
+				<input type="hidden" value="USD" name="Currency" />
+				<button  data-placement="top" data-rel="tooltip" title="Support Us"  class=" btn btn-large dropdown-toggle" type="submit">Donate Now</button>
+			</form>
+		</figure>*@
+		</section>
+	</section>
+</section>
+<!-- End of Donation Box -->
+    </div>
+</div>

@@ -9,3 +9,4 @@ C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentat
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Presentation\Nop.Web\Plugins\Payments.CashOnDelivery\Nop.Plugin.Payments.CashOnDelivery.pdb
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.Payments.CashOnDelivery\obj\Release\Nop.Plugin.Payments.CashOnDelivery.dll
 C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.Payments.CashOnDelivery\obj\Release\Nop.Plugin.Payments.CashOnDelivery.pdb
+C:\Users\Administrator\Desktop\FertilityWater_ECom\FertilityWaterStore\Plugins\Nop.Plugin.Payments.CashOnDelivery\obj\Release\Nop.Plugin.Payments.CashOnDelivery.csprojResolveAssemblyReference.cache
